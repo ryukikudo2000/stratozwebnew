@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事務所紹介｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="社会保険労務士法人ストラテジーの事務所紹介ページです。代表社労士のプロフィール、事務所の理念・沿革・アクセスをご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 72px; }
+    .philosophy-card {
+      background: var(--color-white); border-radius: var(--radius-lg); padding: 36px 28px;
+      border: 1px solid var(--color-border); text-align: center; transition: var(--transition);
+    }
+    .philosophy-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .philosophy-icon { font-size: 2rem; color: var(--color-accent); margin-bottom: 16px; }
+    .philosophy-word { font-size: 1.2rem; font-weight: 900; color: var(--color-primary); font-family: var(--font-serif); margin-bottom: 12px; }
+    .philosophy-desc { font-size: 0.88rem; color: var(--color-text-light); line-height: 1.6; }
+
+    .profile-section { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: start; margin-bottom: 72px; }
+
+    /* 代表者写真コンテナ */
+    .profile-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      background: #f8f9fb;
+    }
+
+    /* 代表者写真 <img> */
+    .representative-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center center;
+    }
+
+    /* 写真下キャプション */
+    .profile-photo-text {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* 写真直下の氏名表示 */
+    .profile-photo-name {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--color-primary);
+    }
+    .profile-photo-name .profile-photo-title { font-size: 0.82rem; color: var(--color-text-light); display: block; margin-bottom: 4px; }
+    .profile-photo-name .profile-photo-name-text { font-weight: 700; font-size: 1rem; }
+    .profile-content h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-serif); margin-bottom: 4px; }
+    .profile-kana { font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 20px; }
+    .profile-title { display: inline-block; background: var(--color-primary); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 2px; margin-bottom: 20px; }
+    .profile-desc { font-size: 0.93rem; color: var(--color-text-light); line-height: 1.6; margin-bottom: 16px; }
+    .profile-career h3 { font-size: 0.9rem; font-weight: 700; color: var(--color-primary); margin-bottom: 12px; }
+    .career-list { display: flex; flex-direction: column; gap: 8px; }
+    .career-item { display: flex; gap: 16px; font-size: 0.88rem; }
+    .career-year { font-weight: 700; color: var(--color-primary); white-space: nowrap; min-width: 50px; }
+    .career-text { color: var(--color-text-light); line-height: 1.5; }
+
+    .history-list { display: flex; flex-direction: column; gap: 0; }
+    .history-item { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--color-border); font-size: 0.92rem; }
+    .history-year { font-weight: 700; color: var(--color-primary); min-width: 60px; }
+    .history-text { color: var(--color-text-light); line-height: 1.5; }
+
+    .overview-table { width: 100%; border-collapse: collapse; }
+    .overview-table th, .overview-table td {
+      padding: 16px 20px; border: 1px solid var(--color-border);
+      text-align: left; vertical-align: top; font-size: 0.92rem; line-height: 1.6;
+    }
+    .overview-table th { background: var(--color-bg-light); color: var(--color-primary); font-weight: 700; white-space: nowrap; width: 180px; }
+
+    @media (max-width: 768px) {
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .profile-section { grid-template-columns: 1fr; }
+      .profile-photo { width: 100%; max-width: 100%; margin: 0 auto; }
+      .representative-photo { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="header-top"><div class="container header-top-inner"><div class="header-info"><span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span><span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span><span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span></div><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></div>
+    <div class="header-main"><div class="container header-main-inner">
+      <div class="site-logo"><a href="index.html"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></a></div>
+      <nav class="global-nav" id="global-nav"><ul class="nav-list">
+        <li class="nav-item"><a href="index.html"><span class="nav-en">Home</span></a></li>
+        <li class="nav-item"><a href="business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+        <li class="nav-item"><a href="cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+        <li class="nav-item"><a href="price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+        <li class="nav-item active"><a href="about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+        <li class="nav-item"><a href="qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+        <li class="nav-item"><a href="column.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+      </ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div></div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav"><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button><div class="mobile-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><ul class="mobile-nav-list"><li><a href="index.html">Home</a></li><li><a href="business.html">Business Outline <span>業務内容</span></a></li><li><a href="cases.html">Case Example <span>解決事例</span></a></li><li><a href="price.html">Price List <span>費用一覧</span></a></li><li><a href="about.html">About Us <span>事務所紹介</span></a></li><li><a href="qa.html">Q&amp;A <span>よくある質問</span></a></li><li><a href="column.html">Column <span>コラム</span></a></li></ul>
+  <div class="mobile-nav-contact"><a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></nav>
+
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>事務所紹介</span></div>
+        <p class="page-hero-en">About Us</p>
+        <h1 class="page-hero-title">事務所紹介</h1>
+      </div>
+    </div>
+
+    <section class="about-intro-section about-section--immersive" aria-label="事務所のご案内">
+      <div class="section-immersive-bg" aria-hidden="true">
+        <img class="section-immersive-bg-img" src="images/service-intro.jpg" width="1600" height="1000" alt="">
+      </div>
+      <div class="section-immersive-overlay" aria-hidden="true"></div>
+      <div class="container section-immersive-inner">
+        <div class="section-immersive-intro">
+          <p class="section-label section-immersive-label">Our Firm</p>
+          <h2 class="section-title section-immersive-heading about-intro-heading">経営と現場の両面から、人事労務を支える</h2>
+          <p class="section-immersive-lead">
+            港区元赤坂のオフィスを拠点に、上場準備企業から中小企業まで、実務に根ざした労務支援を行っています。理念・沿革・アクセスはこのページでご確認いただけます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+
+        <!-- 代表プロフィール -->
+        <div class="section-header">
+          <p class="section-label">Representative</p>
+          <h2 class="section-title">代表者ごあいさつ</h2>
+        </div>
+        <div class="profile-section" data-aos="fade-up">
+          <div class="profile-photo">
+            <img src="images/representative.png" alt="代表社員 梅村𠮷博" class="representative-photo">
+            <span class="profile-photo-name">
+              <span class="profile-photo-title">代表社員・特定社会保険労務士</span>
+              <span class="profile-photo-name-text">梅村吉博</span>
+            </span>
+          </div>
+          <div class="profile-content">
+            <span class="profile-title">代表社員 / 特定社会保険労務士 &amp; 人事労務コンサルタント</span>
+            <h2>梅村 𠮷博</h2>
+            <p class="profile-kana">（うめむら よしひろ）</p>
+            <p class="profile-desc">
+              社会保険労務士法人ストラテジー 代表社員の梅村です。<br><br>
+              企業での人事労務業務に従事して約15年間に、総合出版社・経営コンサルタント会社・IT医療系上場企業の執行役員人事総務部長を経て、特定社会保険労務士＆人事労務コンサルタント事務所を2010年に立ち上げました。<br><br>
+              『顧問先企業の皆様の社業が発展する一端を担いたい』という真摯な気持ちをエネルギーとして、事業展開を行っております。<br><br>
+              経営者との長年のやり取りから、会社にとって何が必要かを見極めて、そのステージごとにご提案できることが最大の強みとなっております。特に、<strong>人事制度構築・賃金制度改訂とIPO支援</strong>には高い評価をいただいております。<br><br>
+              また、弁護士事務所をはじめ、ほかの多くの士業事務所と連携した体制となっておりますので、法律的な守りを固めたい、組織を強化したいというご要望がありましたら、是非ともお気軽にお問い合わせいただければ幸いです。
+            </p>
+            <div class="profile-career">
+              <h3>主な経歴</h3>
+              <div class="career-list">
+                <div class="career-item"><span class="career-year">〜2010年</span><span class="career-text">総合出版社・経営コンサルタント会社・IT医療系上場企業（執行役員 人事総務部長）など人事労務業務に約15年従事</span></div>
+                <div class="career-item"><span class="career-year">2010年</span><span class="career-text">特定社会保険労務士＆人事労務コンサルタント事務所を設立</span></div>
+                <div class="career-item"><span class="career-year">2017年</span><span class="career-text">社会保険労務士法人ストラテジー 設立・代表社員就任</span></div>
+              </div>
+            </div>
+
+            <!-- 主な顧問先・提携先 -->
+            <div style="margin-top:28px; background:var(--color-bg-light); border-radius:var(--radius-md); padding:24px; border:1px solid var(--color-border);">
+              <h3 style="font-size:0.95rem; font-weight:700; color:var(--color-primary); margin-bottom:16px;"><i class="fas fa-building" style="color:var(--color-accent); margin-right:8px;"></i>主な顧問先・提携先</h3>
+              <p style="font-size:0.88rem; line-height:2; color:var(--color-text-light); margin-bottom:14px;">
+                IT関連事業、製造業、飲食業、医療機関・介護業、金融業、不動産業、建設業、広告代理業、通信販売業、美容関連業、投資会社、教育研修業、外資系検査会社、外資系機械会社　他
+              </p>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--color-text-light);">
+                  <i class="fas fa-handshake" style="color:var(--color-accent); margin-top:3px; font-size:0.8rem;"></i>
+                  <span>案件ごとに<strong>弁護士事務所 約50社</strong>と提携</span>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--color-text-light);">
+                  <i class="fas fa-handshake" style="color:var(--color-accent); margin-top:3px; font-size:0.8rem;"></i>
+                  <span><strong>公認会計士事務所 5社・税理士事務所 10社</strong>と提携</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 事務所概要 -->
+        <div class="section-header" style="margin-top:72px;">
+          <p class="section-label">Overview</p>
+          <h2 class="section-title">事務所概要</h2>
+        </div>
+        <div class="table-responsive">
+        <table class="overview-table" data-aos="fade-up">
+          <tbody>
+            <tr><th>事務所名</th><td>社会保険労務士法人ストラテジー</td></tr>
+            <tr><th>代表社員</th><td>梅村 𠮷博</td></tr>
+            <tr><th>所在地</th><td>〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F</td></tr>
+            <tr><th>電話番号</th><td><a href="tel:0368903248">03-6890-3248</a></td></tr>
+            <tr><th>FAX</th><td>03-6383-4314</td></tr>
+            <tr><th>メールアドレス</th><td><a href="mailto:info-str3@strcareer.co.jp">info-str3@strcareer.co.jp</a></td></tr>
+            <tr><th>受付時間</th><td>平日 9:00〜18:00（土日祝・年末年始を除く）</td></tr>
+            <tr><th>設立</th><td>2017年2月3日</td></tr>
+            <tr><th>取引銀行</th><td>みずほ銀行 外苑前支店 ／ 三菱東京UFJ銀行 青山通支店</td></tr>
+            <tr><th>対応エリア</th><td>東京都・神奈川県・埼玉県・千葉県を中心に全国対応（オンライン相談可）</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <!-- アクセス -->
+        <div class="section-header" style="margin-top:72px;">
+          <p class="section-label">Access</p>
+          <h2 class="section-title">アクセス</h2>
+        </div>
+        <div data-aos="fade-up">
+          <p style="font-size:0.95rem;color:var(--color-text-light);margin-bottom:20px;line-height:1.8;">
+            <i class="fas fa-train" style="color:var(--color-accent);margin-right:6px;"></i>東京メトロ銀座線・丸ノ内線「赤坂見附駅」徒歩1分<br>
+            <i class="fas fa-train" style="color:var(--color-accent);margin-right:6px;"></i>東京メトロ半蔵門線・南北線・有楽町線「永田町駅」徒歩3分
+          </p>
+          <div class="office-map">
+            <iframe
+              src="https://www.google.com/maps?q=%E7%A4%BE%E4%BC%9A%E4%BF%9D%E9%99%BA%E5%8A%B4%E5%8B%99%E5%A3%AB%E6%B3%95%E4%BA%BA%E3%82%B9%E3%83%88%E3%83%A9%E3%83%86%E3%82%B8%E3%83%BC+%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%85%83%E8%B5%A4%E5%9D%821-2-7+%E8%B5%A4%E5%9D%82K%E3%82%BF%E3%83%AF%E3%83%BC&amp;hl=ja&amp;z=17&amp;output=embed"
+              width="100%"
+              height="360"
+              style="border:0;display:block;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="社会保険労務士法人ストラテジー アクセスマップ"
+            ></iframe>
+          </div>
+          <div style="text-align:center;margin-top:14px;">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A4%BE%E4%BC%9A%E4%BF%9D%E9%99%BA%E5%8A%B4%E5%8B%99%E5%A3%AB%E6%B3%95%E4%BA%BA%E3%82%B9%E3%83%88%E3%83%A9%E3%83%86%E3%82%B8%E3%83%BC+%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%85%83%E8%B5%A4%E5%9D%821-2-7+%E8%B5%A4%E5%9D%82K%E3%82%BF%E3%83%AF%E3%83%BC4F" target="_blank" rel="noopener noreferrer" class="map-open-btn">
+              <i class="fas fa-map-marker-alt"></i>Googleマップで開く
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="contact-cta-section">
+      <div class="contact-cta-bg" aria-hidden="true">
+        <img class="contact-cta-bg-img" src="images/cta-bg.jpg" width="1920" height="800" alt="">
+      </div>
+      <div class="contact-cta-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="contact-cta-inner">
+          <div class="contact-cta-text">
+            <p class="contact-cta-sub">まずはお気軽にご相談ください</p>
+            <h2 class="contact-cta-title">無料相談受付中</h2>
+            <p class="contact-cta-desc">初回相談は無料です。どのような課題でもお気軽にお問合せください。</p>
+          </div>
+          <div class="contact-cta-buttons">
+            <a href="tel:0368903248" class="btn btn-tel"><i class="fas fa-phone-alt"></i><span><small>電話でのお問合せ（平日 9:00〜18:00）</small>03-6890-3248</span></a>
+            <a href="contact.html" class="btn btn-contact-mail"><i class="fas fa-envelope"></i><span><small>メール・フォームでのお問合せ（24時間受付）</small>お問合せフォームへ</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container footer-main-inner"><div class="footer-brand"><div class="footer-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address></div><nav class="footer-nav"><div class="footer-nav-col"><h3 class="footer-nav-heading">サービス</h3><ul><li><a href="business.html#risk">リスクコンサルティング</a></li><li><a href="business.html#ipo">IPO支援</a></li><li><a href="business.html#outsourcing">人事労務アウトソーシング</a></li><li><a href="business.html#dispatch">派遣・職業紹介許可申請</a></li><li><a href="business.html#subsidy">助成金サポート</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">事務所</h3><ul><li><a href="about.html">事務所紹介</a></li><li><a href="cases.html">解決事例</a></li><li><a href="price.html">費用一覧</a></li><li><a href="qa.html">よくある質問</a></li><li><a href="column.html">コラム</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">お問合せ</h3><ul><li><a href="contact.html">お問合せフォーム</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></nav></div></div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p><ul class="footer-links"><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></div>
+  </footer>
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>

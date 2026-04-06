@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>費用一覧｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="社会保険労務士法人ストラテジーの費用一覧です。各サービスの料金体系を透明性高くご案内します。まずはお気軽にご相談ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .price-note {
+      background: #fffbf0; border: 1px solid #f0d080; border-radius: var(--radius-md);
+      padding: 16px 24px; font-size: 0.88rem; color: #7a5800; line-height: 1.55;
+      margin-bottom: 48px; display: flex; align-items: flex-start; gap: 10px;
+    }
+    .price-note i { color: var(--color-accent); margin-top: 2px; flex-shrink: 0; }
+    .price-inline-label {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      font-weight: 500;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .price-inline-label--spaced { margin-top: 24px; }
+    .price-payroll-box {
+      background: var(--color-bg-light);
+      border-radius: var(--radius-md);
+      padding: 22px 28px;
+      border: 1px solid var(--color-border);
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+      color: var(--color-text);
+      line-height: 1.85;
+    }
+    .price-payroll-box p { margin-bottom: 10px; }
+    .price-payroll-box p:last-child { margin-bottom: 0; }
+    .price-lead-muted {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+    .price-section { margin-bottom: 72px; }
+    .price-section-title {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 1.3rem; font-weight: 700; color: var(--color-primary);
+      font-family: var(--font-serif); margin-bottom: 24px;
+      padding-bottom: 14px; border-bottom: 2px solid var(--color-accent);
+      flex-wrap: wrap;
+      line-height: 1.45;
+    }
+    .price-section-title .icon-box {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+      border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .price-section-title .icon-box i { color: #fff; font-size: 1rem; }
+    .price-table-wrap {
+      max-width: 860px;
+      margin: 0 auto 12px;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    .price-table thead th {
+      background: #5c6bc0;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 16px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid rgba(255,255,255,0.20);
+      white-space: nowrap;
+    }
+    .price-table tbody td {
+      padding: 10px 16px;
+      border: 1px solid var(--color-border);
+      vertical-align: middle;
+      line-height: 1.55;
+      text-align: center;
+    }
+    .price-table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+    }
+    .price-table tbody td[colspan] {
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+    }
+    .price-table tbody tr:nth-child(odd)  { background: #ffffff; }
+    .price-table tbody tr:nth-child(even) { background: #f0f2fa; }
+    .price-table tbody tr:hover           { background: #e4e8f5; }
+    .price-table .col-person { width: 40%; }
+    .price-table .col-price  { width: 60%; }
+    .price-table thead th.th-group {
+      background: #f0f2fa;
+      color: var(--color-text);
+      font-weight: 600;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .price-table thead th.th-sub {
+      background: #5c6bc0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .price-table .col-person-4  { width: 22%; }
+    .price-table .col-price-4   { width: 28%; }
+    .price-table .price-col {
+      text-align: center;
+      font-weight: 700;
+      color: var(--color-primary);
+      white-space: nowrap;
+    }
+    .price-table .price-col strong { color: var(--color-primary); }
+    .price-table tbody td.td-item {
+      background: #e8eaf6;
+      font-weight: 700;
+      color: var(--color-text);
+      text-align: left;
+    }
+    .price-table thead th.th-item {
+      background: #e8eaf6;
+      color: var(--color-text);
+      font-weight: 700;
+      text-align: left;
+      border: 1px solid var(--color-border);
+    }
+    .price-tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 2px; background: #e8f0fc;
+      color: var(--color-primary); margin-right: 4px;
+    }
+    .price-sub { font-size: 0.82rem; color: var(--color-text-muted); margin-top: 8px; max-width: 860px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 12px; }
+    .plan-card {
+      border: 2px solid var(--color-border); border-radius: var(--radius-lg);
+      overflow: hidden; transition: var(--transition);
+    }
+    .plan-card.featured { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+    .plan-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .plan-header {
+      padding: 24px 20px; text-align: center;
+      background: var(--color-bg-light); border-bottom: 1px solid var(--color-border);
+    }
+    .plan-card.featured .plan-header { background: var(--color-primary); }
+    .plan-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px; background: var(--color-accent);
+      color: #fff; margin-bottom: 10px;
+    }
+    .plan-name { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
+    .plan-card.featured .plan-name { color: #fff; }
+    .plan-price { font-size: 0.82rem; color: var(--color-text-muted); margin-top: 6px; }
+    .plan-card.featured .plan-price { color: rgba(255,255,255,0.7); }
+    .plan-price strong { font-size: 1.6rem; font-weight: 900; color: var(--color-primary); }
+    .plan-card.featured .plan-price strong { color: var(--color-accent-light); }
+    .plan-body { padding: 20px; }
+    .plan-features { display: flex; flex-direction: column; gap: 8px; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.87rem; color: var(--color-text); line-height: 1.5; }
+    .plan-features li i { color: var(--color-accent); margin-top: 3px; font-size: 0.75rem; }
+
+    /* ---- 目次 ---- */
+    .price-toc {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .price-toc-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px 36px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .price-toc-list li { margin: 0; min-width: 0; }
+    .price-toc-list a {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      line-height: 1.55;
+      padding: 10px 4px 10px 0;
+      border-bottom: 1px solid rgba(221, 227, 236, 0.85);
+      transition: var(--transition);
+    }
+    .price-toc-list a i {
+      color: var(--color-accent);
+      font-size: 0.65rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .price-toc-list a:hover {
+      color: var(--color-accent);
+      padding-left: 4px;
+    }
+
+    /* ========== ≤1024px タブレット ========== */
+    @media (max-width: 1024px) {
+      .page-price .content-section { padding: 72px 0; }
+      .page-price .section-header { margin-bottom: 40px; }
+      .page-price .section-title { font-size: clamp(1.45rem, 3vw, 1.75rem); }
+      .page-price .section-desc { font-size: 0.95rem; line-height: 1.65; }
+      .price-note { margin-bottom: 40px; padding: 14px 20px; }
+      .price-section { margin-bottom: 56px; }
+      .price-section-title { font-size: 1.18rem; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; }
+      .price-section-title .icon-box { width: 36px; height: 36px; }
+      .price-section-title .icon-box i { font-size: 0.92rem; }
+      .price-table { font-size: 0.86rem; }
+      .price-table thead th {
+        white-space: normal;
+        padding: 10px 10px;
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+      .price-table tbody td { padding: 9px 12px; font-size: 0.86rem; }
+      .price-table .price-col { white-space: normal; }
+      .price-toc { padding: 22px 24px; margin-bottom: 32px; }
+      .price-toc-list { gap: 4px 24px; }
+      .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .page-price .page-hero { padding: 68px 0 52px; }
+    }
+
+    /* ========== ≤768px スマホ：タイポ・余白・タップ領域 ========== */
+    @media (max-width: 768px) {
+      .page-price .content-section { padding: 40px 0; }
+      .page-price .section-header { margin-bottom: 28px; }
+      .page-price .section-label { font-size: 0.72rem; }
+      .page-price .section-title { font-size: clamp(1.4rem, 5.2vw, 1.65rem); line-height: 1.35; }
+      .page-price .section-desc { font-size: 0.94rem; line-height: 1.7; margin-top: 10px; }
+      .price-note {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 28px;
+        padding: 14px 16px;
+        font-size: 0.9rem;
+        line-height: 1.65;
+      }
+      .price-inline-label { font-size: 0.88rem; margin-bottom: 8px; }
+      .price-lead-muted { font-size: 0.9rem; margin-bottom: 16px; }
+      .price-payroll-box {
+        padding: 16px 16px;
+        font-size: 0.9rem;
+        line-height: 1.75;
+      }
+      .price-section { margin-bottom: 44px; }
+      .price-section-title {
+        font-size: clamp(1.05rem, 4.2vw, 1.2rem);
+        gap: 10px;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+      }
+      .price-section-title .icon-box { width: 34px; height: 34px; }
+      .price-section-title .icon-box i { font-size: 0.88rem; }
+      .price-sub { font-size: 0.88rem; margin-top: 10px; padding: 0 2px; }
+      .price-toc { padding: 18px 16px; margin-bottom: 24px; border-radius: var(--radius-md); }
+      .price-toc-list { grid-template-columns: 1fr; gap: 0; }
+      .price-toc-list a {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        min-height: 48px;
+        align-items: center;
+        padding: 12px 6px 12px 0;
+      }
+      .price-toc-list a i { margin-top: 0; font-size: 0.62rem; }
+      .plan-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      .page-price .page-hero { padding: 44px 0 36px; }
+      .page-price .breadcrumb { margin-bottom: 12px; font-size: 0.76rem; flex-wrap: wrap; }
+      .page-price .page-hero-en { font-size: 0.7rem; margin-bottom: 8px; }
+      .page-price .page-hero-title { font-size: clamp(1.45rem, 6vw, 1.85rem); letter-spacing: 0.03em; }
+
+      /* CTA 強調 */
+      .page-price .contact-cta-section { padding: 56px 0; }
+      .page-price .contact-cta-inner { gap: 26px; }
+      .page-price .contact-cta-sub { font-size: 0.82rem; letter-spacing: 0.1em; }
+      .page-price .contact-cta-title {
+        font-size: clamp(1.65rem, 6.5vw, 2rem);
+        text-shadow: 0 2px 18px rgba(0,0,0,0.2);
+      }
+      .page-price .contact-cta-desc { font-size: 0.95rem; line-height: 1.65; }
+      .page-price .contact-cta-buttons { width: 100%; max-width: 420px; margin: 0 auto; gap: 14px; }
+      .page-price .btn-tel,
+      .page-price .btn-contact-mail {
+        width: 100%;
+        min-height: 52px;
+        padding: 16px 20px;
+        border-radius: var(--radius-md);
+        justify-content: flex-start;
+        box-sizing: border-box;
+      }
+      .page-price .btn-tel i,
+      .page-price .btn-contact-mail i { font-size: 1.45rem; flex-shrink: 0; }
+
+      .page-price .footer-main { padding-bottom: 8px; }
+      .page-price .footer-address { font-size: 0.9rem; line-height: 1.75; }
+      .page-price .footer-nav a { line-height: 1.55; padding: 4px 0; display: inline-block; }
+    }
+
+    /* ========== 768px以下：料金カテゴリタブ ========== */
+    .price-tab-bar-wrap { display: none; }
+    @media (max-width: 768px) {
+      .price-toc { display: none !important; }
+      .price-tab-bar-wrap {
+        display: block;
+        margin-bottom: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 25;
+        background: var(--color-bg);
+        padding: 4px 0 10px;
+        border-bottom: 1px solid rgba(221, 227, 236, 0.9);
+      }
+      .price-tab-bar {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 0 8px;
+        scrollbar-width: thin;
+      }
+      .price-tab {
+        flex: 0 0 auto;
+        padding: 10px 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: 100px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: var(--font-sans);
+        white-space: nowrap;
+      }
+      .price-tab[aria-selected="true"] {
+        background: var(--color-primary);
+        color: #fff;
+        border-color: var(--color-primary);
+      }
+      .price-tab:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+      }
+    }
+
+    /* ========== 768px以下：料金表は横スクロール ========== */
+    @media (max-width: 768px) {
+      .price-table-wrap {
+        max-width: 100% !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 12px;
+        padding-bottom: 4px;
+      }
+      .price-table-wrap .price-table {
+        display: table;
+        width: max(100%, 620px);
+        min-width: 620px;
+        margin-bottom: 12px;
+      }
+      .price-table-wrap .price-table thead { display: table-header-group; }
+      .price-table-wrap .price-table tbody { display: table-row-group; }
+      .price-table-wrap .price-table tr { display: table-row; }
+      .price-table-wrap .price-table th,
+      .price-table-wrap .price-table td { display: table-cell; }
+      .price-table-wrap .price-table .price-col { white-space: nowrap; }
+      .price-table-wrap .price-table .td-item,
+      .price-table-wrap .price-table tbody td:first-child {
+        white-space: normal;
+        max-width: 240px;
+      }
+    }
+
+    /* ========== ≤480px 小型スマホ ========== */
+    @media (max-width: 480px) {
+      .page-price .content-section { padding: 44px 0; }
+      .price-section { margin-bottom: 38px; }
+      .price-note { padding: 12px 14px; font-size: 0.88rem; }
+      .price-toc { padding: 16px 14px; }
+      .price-toc-list a { font-size: 0.88rem; min-height: 46px; }
+      .price-section-title { font-size: 1.02rem; gap: 8px; }
+      .price-section-title .icon-box { width: 32px; height: 32px; }
+      .price-section-title .icon-box i { font-size: 0.82rem; }
+      .price-payroll-box { padding: 14px 14px; font-size: 0.87rem; }
+      .page-price .page-hero { padding: 40px 0 32px; }
+      .page-price .contact-cta-section { padding: 48px 0; }
+      .page-price .btn-contact-mail span { font-size: 0.95rem; }
+      .page-price .btn-tel span { font-size: clamp(1.18rem, 4.2vw, 1.32rem); }
+    }
+  </style>
+</head>
+<body class="page-price">
+  <header class="site-header" id="site-header">
+    <div class="header-top"><div class="container header-top-inner"><div class="header-info"><span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span><span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span><span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span></div><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></div>
+    <div class="header-main"><div class="container header-main-inner">
+      <div class="site-logo"><a href="index.html"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></a></div>
+      <nav class="global-nav" id="global-nav"><ul class="nav-list">
+        <li class="nav-item"><a href="index.html"><span class="nav-en">Home</span></a></li>
+        <li class="nav-item"><a href="business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+        <li class="nav-item"><a href="cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+        <li class="nav-item active"><a href="price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+        <li class="nav-item"><a href="about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+        <li class="nav-item"><a href="qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+        <li class="nav-item"><a href="column.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+      </ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div></div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav"><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button><div class="mobile-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><ul class="mobile-nav-list"><li><a href="index.html">Home</a></li><li><a href="business.html">Business Outline <span>業務内容</span></a></li><li><a href="cases.html">Case Example <span>解決事例</span></a></li><li><a href="price.html">Price List <span>費用一覧</span></a></li><li><a href="about.html">About Us <span>事務所紹介</span></a></li><li><a href="qa.html">Q&amp;A <span>よくある質問</span></a></li><li><a href="column.html">Column <span>コラム</span></a></li></ul>
+  <div class="mobile-nav-contact"><a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></nav>
+
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>費用一覧</span></div>
+        <p class="page-hero-en">Price List</p>
+        <h1 class="page-hero-title">費用一覧</h1>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Pricing</p>
+          <h2 class="section-title">料金体系</h2>
+          <p class="section-desc">企業規模・内容により変動する場合がありますので、詳細はお問い合わせください。</p>
+        </div>
+
+        <nav class="price-toc" aria-label="このページの目次">
+          <ul class="price-toc-list">
+            <li><a href="#insurance-start"><i class="fas fa-chevron-right" aria-hidden="true"></i>労働保険・社会保険 新規加入</a></li>
+            <li><a href="#advisor-fee"><i class="fas fa-chevron-right" aria-hidden="true"></i>顧問報酬（労働保険・社会保険手続き）</a></li>
+            <li><a href="#labor-consult"><i class="fas fa-chevron-right" aria-hidden="true"></i>労務相談のみ</a></li>
+            <li><a href="#admin-procedure"><i class="fas fa-chevron-right" aria-hidden="true"></i>事務手続き</a></li>
+            <li><a href="#payroll"><i class="fas fa-chevron-right" aria-hidden="true"></i>給与計算事務手続き</a></li>
+            <li><a href="#other-procedure"><i class="fas fa-chevron-right" aria-hidden="true"></i>その他手続き</a></li>
+            <li><a href="#work-rules"><i class="fas fa-chevron-right" aria-hidden="true"></i>就業規則の作成業務</a></li>
+            <li><a href="#hr-system"><i class="fas fa-chevron-right" aria-hidden="true"></i>人事制度構築業務等</a></li>
+          </ul>
+        </nav>
+
+        <div class="price-note">
+          <i class="fas fa-info-circle"></i>
+          <span>下記の料金はすべて<strong>税抜表示</strong>です（消費税10%が別途加算されます）。企業規模・内容により変動する場合がありますので、詳細はお気軽にご相談ください。</span>
+        </div>
+
+        <div class="price-tab-bar-wrap" id="price-tab-bar-wrap">
+          <div class="price-tab-bar" id="price-tab-bar" role="tablist" aria-label="料金カテゴリ">
+            <button type="button" class="price-tab" role="tab" id="tab-insurance-start" aria-selected="true" aria-controls="insurance-start" data-target="insurance-start">新規加入</button>
+            <button type="button" class="price-tab" role="tab" id="tab-advisor-fee" aria-selected="false" aria-controls="advisor-fee" data-target="advisor-fee">顧問報酬</button>
+            <button type="button" class="price-tab" role="tab" id="tab-labor-consult" aria-selected="false" aria-controls="labor-consult" data-target="labor-consult">労務相談</button>
+            <button type="button" class="price-tab" role="tab" id="tab-admin-procedure" aria-selected="false" aria-controls="admin-procedure" data-target="admin-procedure">事務手続</button>
+            <button type="button" class="price-tab" role="tab" id="tab-payroll" aria-selected="false" aria-controls="payroll" data-target="payroll">給与計算</button>
+            <button type="button" class="price-tab" role="tab" id="tab-other-procedure" aria-selected="false" aria-controls="other-procedure" data-target="other-procedure">その他</button>
+            <button type="button" class="price-tab" role="tab" id="tab-work-rules" aria-selected="false" aria-controls="work-rules" data-target="work-rules">就業規則</button>
+            <button type="button" class="price-tab" role="tab" id="tab-hr-system" aria-selected="false" aria-controls="hr-system" data-target="hr-system">人事制度</button>
+          </div>
+        </div>
+
+        <!-- 1. 労働保険・社会保険 新規加入 -->
+        <div class="price-section" id="insurance-start" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-file-medical-alt"></i></div>
+            1. 労働保険・社会保険 新規加入
+          </h2>
+
+          <p class="price-inline-label">スポット契約</p>
+          <div class="price-table-wrap">
+          <table class="price-table" style="margin-bottom:28px;">
+            <thead>
+              <tr>
+                <th class="col-person-3">企業規模</th>
+                <th class="price-col col-price-3">労災・雇用保険</th>
+                <th class="price-col col-price-3">健保・厚年</th>
+                <th class="price-col col-price-3">セット</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-person-3">1〜5名</td><td class="price-col">50,000円</td><td class="price-col">50,000円</td><td class="price-col">88,000円</td></tr>
+              <tr><td class="col-person-3">6〜10名</td><td class="price-col">60,000円</td><td class="price-col">60,000円</td><td class="price-col">104,000円</td></tr>
+              <tr><td class="col-person-3">11〜20名</td><td class="price-col">75,000円</td><td class="price-col">75,000円</td><td class="price-col">130,000円</td></tr>
+              <tr><td class="col-person-3">21名以上</td><td colspan="3">1名増すごとに2,000円加算</td></tr>
+            </tbody>
+          </table>
+          </div>
+
+          <p class="price-inline-label price-inline-label--spaced">顧問契約時</p>
+          <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th class="col-person-3">企業規模</th>
+                <th class="price-col col-price-3">労災・雇用保険</th>
+                <th class="price-col col-price-3">健保・厚年</th>
+                <th class="price-col col-price-3">セット</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-person-3">1〜5名</td><td class="price-col">35,000円</td><td class="price-col">35,000円</td><td class="price-col">63,000円</td></tr>
+              <tr><td class="col-person-3">6〜10名</td><td class="price-col">48,000円</td><td class="price-col">48,000円</td><td class="price-col">84,000円</td></tr>
+              <tr><td class="col-person-3">11〜20名</td><td class="price-col">60,000円</td><td class="price-col">60,000円</td><td class="price-col">104,000円</td></tr>
+              <tr><td class="col-person-3">21名以上</td><td colspan="3">1名増すごとに2,000円加算</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <!-- 2. 顧問報酬 -->
+        <div class="price-section" id="advisor-fee" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-handshake"></i></div>
+            2. 顧問報酬（労働保険・社会保険手続き）
+          </h2>
+          <p class="price-inline-label">労働保険・社会保険の手続き</p>
+          <div class="price-table-wrap" style="max-width:680px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th class="col-person-4">人員</th>
+                <th class="price-col col-price-4">報酬月額</th>
+                <th class="col-person-4">人員</th>
+                <th class="price-col col-price-4">報酬月額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-person-4">1〜5名</td><td class="price-col">25,000円</td>
+                <td class="col-person-4">101〜150名</td><td class="price-col">140,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">6〜10名</td><td class="price-col">35,000円</td>
+                <td class="col-person-4">151〜200名</td><td class="price-col">170,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">11〜20名</td><td class="price-col">45,000円</td>
+                <td class="col-person-4">201〜250名</td><td class="price-col">200,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">21〜30名</td><td class="price-col">55,000円</td>
+                <td class="col-person-4">251〜300名</td><td class="price-col">230,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">31〜50名</td><td class="price-col">70,000円</td>
+                <td class="col-person-4">301〜400名</td><td class="price-col">280,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">51〜70名</td><td class="price-col">85,000円</td>
+                <td class="col-person-4">401〜500名</td><td class="price-col">330,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">71〜100名</td><td class="price-col">110,000円</td>
+                <td class="col-person-4">501名以上</td><td class="price-col" style="color:var(--color-text-muted);"><strong>別途協議</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <!-- 3. 労務相談のみ -->
+        <div class="price-section" id="labor-consult" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-comments"></i></div>
+            3. 労務相談のみ
+          </h2>
+          <p class="price-inline-label">労務相談のみの場合</p>
+          <div class="price-table-wrap" style="max-width:680px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th class="col-person-4">人員</th>
+                <th class="price-col col-price-4">報酬月額</th>
+                <th class="col-person-4">人員</th>
+                <th class="price-col col-price-4">報酬月額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-person-4">1〜5名</td><td class="price-col">15,000円</td>
+                <td class="col-person-4">101〜150名</td><td class="price-col">100,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">6〜10名</td><td class="price-col">20,000円</td>
+                <td class="col-person-4">151〜200名</td><td class="price-col">120,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">11〜20名</td><td class="price-col">25,000円</td>
+                <td class="col-person-4">201〜250名</td><td class="price-col">140,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">21〜30名</td><td class="price-col">30,000円</td>
+                <td class="col-person-4">251〜300名</td><td class="price-col">160,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">31〜50名</td><td class="price-col">40,000円</td>
+                <td class="col-person-4">301〜400名</td><td class="price-col">180,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">51〜70名</td><td class="price-col">50,000円</td>
+                <td class="col-person-4">401〜500名</td><td class="price-col">200,000円</td>
+              </tr>
+              <tr>
+                <td class="col-person-4">71〜100名</td><td class="price-col">70,000円</td>
+                <td class="col-person-4">501名以上</td><td class="price-col" style="color:var(--color-text-muted);"><strong>別途協議</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="price-sub"><i class="fas fa-info-circle" style="color:var(--color-accent);"></i> 別途立会が必要な場合、1時間 <strong>30,000円</strong> を申し受けます。</p>
+        </div>
+
+        <!-- 4. 事務手続き -->
+        <div class="price-section" id="admin-procedure" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-file-alt"></i></div>
+            4. 事務手続き
+          </h2>
+          <div class="price-table-wrap" style="max-width:620px;">
+          <table class="price-table">
+            <thead>
+              <!-- 1段目：グループヘッダー -->
+              <tr>
+                <th class="th-group" rowspan="2" style="width:28%; vertical-align:middle; border-right:1px solid var(--color-border);"></th>
+                <th class="th-group" style="width:36%; text-align:center; border-right:1px solid var(--color-border);">社会保険<br>算定届・月変届</th>
+                <th class="th-group" style="width:36%; text-align:center;">労働保険<br>概算・確定</th>
+              </tr>
+              <!-- 2段目：列ヘッダー -->
+              <tr>
+                <th class="th-sub" style="text-align:center; border-right:1px solid rgba(255,255,255,0.2);">報酬額</th>
+                <th class="th-sub" style="text-align:center;">報酬額</th>
+              </tr>
+              <!-- 人員ラベル行 -->
+              <tr>
+                <th class="th-sub" style="text-align:left;">人員</th>
+                <th class="th-sub"></th>
+                <th class="th-sub"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-person">1〜10名</td><td class="price-col">25,000円</td><td class="price-col">25,000円</td></tr>
+              <tr><td class="col-person">11〜20名</td><td class="price-col">35,000円</td><td class="price-col">35,000円</td></tr>
+              <tr><td class="col-person">21〜30名</td><td class="price-col">45,000円</td><td class="price-col">45,000円</td></tr>
+              <tr><td class="col-person">31〜40名</td><td class="price-col">55,000円</td><td class="price-col">55,000円</td></tr>
+              <tr><td class="col-person">41〜50名</td><td class="price-col">65,000円</td><td class="price-col">65,000円</td></tr>
+              <tr><td class="col-person">50名以上</td><td class="price-col" colspan="2" style="color:var(--color-text-muted);">協議のうえ、決定</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p class="price-sub"><i class="fas fa-info-circle" style="color:var(--color-accent);"></i> 有期事業は別途相談</p>
+        </div>
+
+        <!-- 5. 給与計算 -->
+        <div class="price-section" id="payroll" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-calculator"></i></div>
+            5. 給与計算事務手続き
+          </h2>
+          <div class="price-payroll-box">
+            <p>給与計算は、基本料30,000円（10名以下は基本10,000円）一人当たり固定給で500円</p>
+            <p>集計頂いた時間外労働手当入力処理あり　　1名300円プラス</p>
+            <p>元伝票からの集計＆時間外労働処理あり　　1名1,000円プラス</p>
+          </div>
+          <p class="price-sub"><i class="fas fa-info-circle" style="color:var(--color-accent);"></i> 初回登録料として、1名1,500円</p>
+        </div>
+
+        <!-- 6. その他手続き -->
+        <div class="price-section" id="other-procedure" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-clipboard-list"></i></div>
+            6. その他手続き
+          </h2>
+          <div class="price-table-wrap" style="max-width:620px;">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th class="th-group" style="width:40%;"></th>
+                <th class="th-sub col-price-3" style="width:30%;">顧問先</th>
+                <th class="th-sub col-price-3" style="width:30%;">スポット</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-item">36協定</td><td class="price-col" style="color:var(--color-accent);">無料</td><td class="price-col">15,000円</td></tr>
+              <tr><td class="td-item">職業紹介事業新規</td><td class="price-col">80,000円</td><td class="price-col">120,000円</td></tr>
+              <tr><td class="td-item">職業紹介事業年度</td><td class="price-col">40,000円</td><td class="price-col">60,000円</td></tr>
+              <tr><td class="td-item">派遣事業新規</td><td class="price-col">120,000円</td><td class="price-col">160,000円</td></tr>
+              <tr><td class="td-item">派遣事業年度</td><td class="price-col">50,000円</td><td class="price-col">80,000円</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <!-- 就業規則 -->
+        <div class="price-section" id="work-rules" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-book"></i></div>
+            就業規則の作成業務
+          </h2>
+          <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th class="th-sub" style="width:40%; text-align:left;">項　目</th>
+                <th class="th-sub col-price-3">新規作成業務</th>
+                <th class="th-sub col-price-3">変更ならびにチェック業務</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-item">就業規則の作成</td><td class="price-col">300,000円〜</td><td class="price-col">200,000円〜</td></tr>
+              <tr><td class="td-item">賃金規程の作成</td><td class="price-col">150,000円〜</td><td class="price-col">100,000円〜</td></tr>
+              <tr><td class="td-item">退職金規程の作成</td><td class="price-col">150,000円〜</td><td class="price-col">100,000円〜</td></tr>
+              <tr><td class="td-item">パートタイマー就業規則の作成</td><td class="price-col">200,000円〜</td><td class="price-col">150,000円〜</td></tr>
+              <tr><td class="td-item">契約社員就業規則の作成</td><td class="price-col">200,000円〜</td><td class="price-col">150,000円〜</td></tr>
+              <tr><td class="td-item">旅費規程</td><td class="price-col">80,000円〜</td><td class="price-col">50,000円〜</td></tr>
+              <tr><td class="td-item">育児休業規程の作成</td><td class="price-col">80,000円〜</td><td class="price-col">50,000円〜</td></tr>
+              <tr><td class="td-item">介護休業規程の作成</td><td class="price-col">80,000円〜</td><td class="price-col">50,000円〜</td></tr>
+              <tr><td class="td-item">慶弔見舞金規程の作成</td><td class="price-col">50,000円〜</td><td class="price-col">30,000円〜</td></tr>
+              <tr><td class="td-item">役員規程</td><td class="price-col">300,000円〜</td><td class="price-col">200,000円〜</td></tr>
+              <tr><td class="td-item">その他諸規程の作成</td><td class="price-col">50,000円〜</td><td class="price-col">30,000円〜</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+        <!-- 人事制度構築 -->
+        <div class="price-section" id="hr-system" data-aos="fade-up">
+          <h2 class="price-section-title">
+            <div class="icon-box"><i class="fas fa-sitemap"></i></div>
+            人事制度構築業務等
+          </h2>
+          <p class="price-lead-muted">社員数により相談させていただきます。</p>
+          <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr><th class="col-person">項目</th><th class="price-col col-price">報酬額</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-person">
+                  賃金制度構築業務<br>
+                  <span style="font-size:0.78rem; color:var(--color-text-muted);">（職務等級制度の確立・評価制度の確立を含む）</span>
+                </td>
+                <td class="price-col">3,800,000円〜</td>
+              </tr>
+              <tr><td class="col-person">職務等級制度の構築</td><td class="price-col">1,000,000円〜</td></tr>
+              <tr><td class="col-person">評価制度の構築</td><td class="price-col">1,000,000円〜</td></tr>
+              <tr><td class="col-person">賃金制度の構築</td><td class="price-col">1,000,000円〜</td></tr>
+              <tr><td class="col-person">退職金制度の構築</td><td class="price-col">800,000円〜</td></tr>
+              <tr>
+                <td class="col-person">
+                  その他の人事諸制度の整備<br>
+                  <span style="font-size:0.78rem; color:var(--color-text-muted);">（内容により加算あり）</span>
+                </td>
+                <td class="price-col">1,200,000円〜</td>
+              </tr>
+              <tr><td class="col-person">労務監査</td><td class="price-col">1,200,000円〜</td></tr>
+              <tr><td class="col-person">その他の人事労務管理業務</td><td class="price-col">1,200,000円〜</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="contact-cta-section">
+      <div class="container"><div class="contact-cta-inner">
+        <div class="contact-cta-text"><p class="contact-cta-sub">まずは無料でお見積りします</p><h2 class="contact-cta-title">無料相談受付中</h2><p class="contact-cta-desc">予算やご要望に合わせた最適なプランをご提案いたします。</p></div>
+        <div class="contact-cta-buttons">
+          <a href="tel:0368903248" class="btn btn-tel"><i class="fas fa-phone-alt"></i><span><small>電話でのお問合せ（平日 9:00〜18:00）</small>03-6890-3248</span></a>
+          <a href="contact.html" class="btn btn-contact-mail"><i class="fas fa-envelope"></i><span><small>メール・フォームでのお問合せ（24時間受付）</small>お問合せフォームへ</span></a>
+        </div>
+      </div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container footer-main-inner"><div class="footer-brand"><div class="footer-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address></div><nav class="footer-nav"><div class="footer-nav-col"><h3 class="footer-nav-heading">サービス</h3><ul><li><a href="business.html#risk">リスクコンサルティング</a></li><li><a href="business.html#ipo">IPO支援</a></li><li><a href="business.html#outsourcing">人事労務アウトソーシング</a></li><li><a href="business.html#dispatch">派遣・職業紹介許可申請</a></li><li><a href="business.html#subsidy">助成金サポート</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">事務所</h3><ul><li><a href="about.html">事務所紹介</a></li><li><a href="cases.html">解決事例</a></li><li><a href="price.html">費用一覧</a></li><li><a href="qa.html">よくある質問</a></li><li><a href="column.html">コラム</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">お問合せ</h3><ul><li><a href="contact.html">お問合せフォーム</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></nav></div></div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p><ul class="footer-links"><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></div>
+  </footer>
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>

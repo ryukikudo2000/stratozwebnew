@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解決事例｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="社会保険労務士法人ストラテジーの解決事例をご紹介します。労務トラブル、IPO支援、助成金活用など様々な課題解決の実績をご覧ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; justify-content: center; }
+    .filter-btn {
+      padding: 8px 20px; border: 2px solid var(--color-border); border-radius: 100px;
+      font-size: 0.85rem; font-weight: 700; color: var(--color-text-light);
+      background: var(--color-white); cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white);
+    }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3vw, 40px); }
+    .case-card {
+      background: var(--color-white); border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+      transition: var(--transition); display: flex; flex-direction: column;
+    }
+    .case-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .case-card-header {
+      padding: 24px 24px 16px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .case-card-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+      border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+    }
+    .case-card-icon i { color: #fff; font-size: 1.1rem; }
+    .case-card-meta { display: flex; flex-direction: column; gap: 2px; }
+    .case-category-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 2px; background: var(--color-bg-light);
+      color: var(--color-primary); letter-spacing: 0.04em;
+    }
+    .case-company { font-size: 0.78rem; color: var(--color-text-muted); }
+    .case-card-body { padding: 20px 24px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .case-problem-label, .case-solution-label, .case-result-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .case-problem-label { color: #c0392b; }
+    .case-solution-label { color: var(--color-primary); }
+    .case-result-label { color: #27ae60; }
+    .case-problem-text, .case-solution-text { font-size: 0.88rem; color: var(--color-text-light); line-height: 1.5; }
+    .case-result-box {
+      background: #f0fff4; border: 1px solid #b7e4c7; border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+    .case-result-text { font-size: 0.9rem; font-weight: 700; color: #1a7a4a; line-height: 1.6; }
+    .case-title { font-size: 1rem; font-weight: 700; color: var(--color-primary); line-height: 1.6; margin-bottom: 4px; }
+    @media (max-width: 1024px) { .cases-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .cases-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="page-cases">
+  <header class="site-header" id="site-header">
+    <div class="header-top"><div class="container header-top-inner"><div class="header-info"><span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span><span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span><span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span></div><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></div>
+    <div class="header-main"><div class="container header-main-inner">
+      <div class="site-logo"><a href="index.html"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></a></div>
+      <nav class="global-nav" id="global-nav"><ul class="nav-list">
+        <li class="nav-item"><a href="index.html"><span class="nav-en">Home</span></a></li>
+        <li class="nav-item"><a href="business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+        <li class="nav-item active"><a href="cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+        <li class="nav-item"><a href="price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+        <li class="nav-item"><a href="about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+        <li class="nav-item"><a href="qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+        <li class="nav-item"><a href="column.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+      </ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div></div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav"><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button><div class="mobile-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><ul class="mobile-nav-list"><li><a href="index.html">Home</a></li><li><a href="business.html">Business Outline <span>業務内容</span></a></li><li><a href="cases.html">Case Example <span>解決事例</span></a></li><li><a href="price.html">Price List <span>費用一覧</span></a></li><li><a href="about.html">About Us <span>事務所紹介</span></a></li><li><a href="qa.html">Q&amp;A <span>よくある質問</span></a></li><li><a href="column.html">Column <span>コラム</span></a></li></ul>
+  <div class="mobile-nav-contact"><a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></nav>
+
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>解決事例</span></div>
+        <p class="page-hero-en">Case Example</p>
+        <h1 class="page-hero-title">解決事例</h1>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <p class="cases-page-lead">
+          当事務所にこれまでご相談のあった事例をご紹介します。リスクコンサルティング、IPO人事労務支援、人事労務のアウトソーシングなどでお困りの事業者様、その他社会保険労務士の支援が必要な事業者様はぜひお気軽にご相談ください。
+        </p>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">すべて</button>
+          <button class="filter-btn" data-filter="risk">リスク対策</button>
+          <button class="filter-btn" data-filter="ipo">IPO支援</button>
+          <button class="filter-btn" data-filter="outsourcing">アウトソーシング</button>
+          <button class="filter-btn" data-filter="subsidy">助成金</button>
+          <button class="filter-btn" data-filter="dispatch">派遣許可</button>
+        </div>
+
+        <div class="cases-grid">
+
+          <article class="case-card" data-category="risk" data-aos="fade-up">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">リスク対策</span><span class="case-company">IT企業（従業員50名）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">未払い残業代問題を解消し、労基署対応リスクをゼロに</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">固定残業代制度を導入していたが、実態との乖離が大きく退職者から未払い請求が発生。同様の問題が在籍社員にも波及するリスクがあった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">勤怠データを精査し、固定残業代の適正額を再設定。就業規則・賃金規程を全面改定し、適正な労働時間管理体制を構築した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">退職者への未払い精算を完了。在籍社員への請求リスクも解消し、労基署調査でも問題なしと判断された。</p></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-category="ipo" data-aos="fade-up" data-aos-delay="100">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-chart-line"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">IPO支援</span><span class="case-company">SaaS企業（従業員120名）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">上場審査で指摘された労務リスクをすべてクリア</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">主幹事証券会社から「労働時間管理が不十分」「社会保険未加入者あり」と指摘を受け、申請スケジュールが遅延する危機に。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">3ヶ月の緊急対応で勤怠管理システムを刷新。全社員の社会保険加入状況を確認・是正し、36協定を全事業所で整備した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">指摘事項をすべて解消し、予定通りに上場承認を取得。上場後も継続して労務管理体制を維持している。</p></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-category="outsourcing" data-aos="fade-up" data-aos-delay="200">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-users-cog"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">アウトソーシング</span><span class="case-company">製造業（従業員80名）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">給与計算ミスが多発——外注化で品質と効率を両立</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">経理担当者が給与計算を兼務していたが、ミスが頻発。従業員からのクレームが増え、法改正への対応も追いつかない状況だった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">給与計算業務を当法人へ全面移管。クラウド勤怠システムと連携し、ミスのない計算体制と迅速な処理フローを確立した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">計算ミスがゼロに。担当者の工数が月40時間削減され、コア業務への集中が実現した。</p></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-category="subsidy" data-aos="fade-up">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-yen-sign"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">助成金</span><span class="case-company">小売業（従業員30名）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">キャリアアップ助成金で年間180万円を受給</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">パートタイム従業員の正社員転換制度を設けたいが、助成金があることを知らず、コスト負担が課題となっていた。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">キャリアアップ助成金の活用を提案。就業規則への正社員転換規程の整備から申請書類作成まで一括対応した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">6名の正社員転換で助成金総額180万円を受給。採用・定着コストを大幅に削減できた。</p></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-category="dispatch" data-aos="fade-up" data-aos-delay="100">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-file-signature"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">派遣許可</span><span class="case-company">人材系スタートアップ</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">派遣業許可を最短スケジュールで取得、事業開始を実現</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">派遣事業の開始を検討しているが、必要要件や申請手続きが複雑でどこから手をつければよいかわからない状態だった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">財産要件・事務所要件を確認し、不足書類を整理。申請書類一式を当法人が作成し、管轄労働局へ申請代行した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">約2.5ヶ月で許可証を取得。当初の事業開始スケジュールを守って派遣事業を開始できた。</p></div>
+            </div>
+          </article>
+
+          <article class="case-card" data-category="risk" data-aos="fade-up" data-aos-delay="200">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-user-shield"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">リスク対策</span><span class="case-company">サービス業（従業員200名）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">ハラスメント問題をきっかけに職場環境を抜本改善</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">管理職のパワハラにより従業員が相次いで退職。残った従業員のモチベーションも低下し、採用コストが膨らんでいた。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">ハラスメント防止規程の整備、管理職向け研修の実施、相談窓口の設置を提案・実施。弁護士との連携でトラブル処理も対応した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">半年で離職率が前年比40%減。従業員満足度調査でも職場環境の改善が数値で確認された。</p></div>
+            </div>
+          </article>
+
+          <!-- 原文事例1: IPO/M&A労務DD -->
+          <article class="case-card" data-category="ipo" data-aos="fade-up">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-search-dollar"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">IPO支援</span><span class="case-company">IPO前・M&amp;A前の会社</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">IPO前・M&amp;A前の会社の労務面のリスク管理を依頼された</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">IPO前・M&amp;A前の会社について、労務面のリスク管理を依頼された。過去の労働条件通知書の内容が就業規則等と整合しているか、潜在的な未払い債務が存在しないかの精査が必要だった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">過去2年間の労務デューデリジェンスを実施し、過去債務の洗い出しと組織・人の分析を実施。労働条件通知書の内容が就業規則等に照らし合わせて妥当かどうかの確認を行い、目的に合った内容に修正、または新規作成した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">労務面の問題点を解決し、IPO・M&amp;A審査に対応できる盤石な労務体制を構築。潜在リスクを事前に顕在化・是正することで、スケジュール通りに手続きを進めることができた。</p></div>
+            </div>
+          </article>
+
+          <!-- 原文事例2: 労基署 長時間労働 -->
+          <article class="case-card" data-category="risk" data-aos="fade-up" data-aos-delay="100">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-clipboard-check"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">リスク対策</span><span class="case-company">顧問先企業</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">労基署からの指導で「長時間労働についての対策と報告書の作成」を求められた</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">顧問先のお客様から、労働基準監督署の指導で「長時間労働についての対策と報告書の作成について求められた」とのご相談を受けた。どの部門・個人が長時間労働の実態にあるかの把握と、抜本的な改善策の策定が急務だった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">長時間労働をしている部門や個人などを1年にわたり分析。経営陣とともに原因を議論し、仕事の分担・指揮命令の明確化・残業の事前申告制・賃金の適正分配などを導入した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">長時間労働の問題を解決し、労基署への報告書を作成・提出。適切な対策が評価され、行政指導を無事クリアした。</p></div>
+            </div>
+          </article>
+
+          <!-- 原文事例3: IPO人事評価制度 -->
+          <article class="case-card" data-category="ipo" data-aos="fade-up" data-aos-delay="200">
+            <div class="case-card-header">
+              <div class="case-card-icon"><i class="fas fa-sitemap"></i></div>
+              <div class="case-card-meta"><span class="case-category-badge">IPO支援</span><span class="case-company">スタートアップ企業（社員規模拡大期）</span></div>
+            </div>
+            <div class="case-card-body">
+              <p class="case-title">将来のIPOに向けて人事評価制度を作成したいとの依頼があった</p>
+              <p class="case-problem-label">■ 課題</p>
+              <p class="case-problem-text">スタートアップから社員規模拡大にあたり、将来のIPOに向けて人事評価制度を作成したいとの依頼があった。現状の組織課題と今後起こりうる問題点の両面から制度設計が必要だった。</p>
+              <p class="case-solution-label">■ 解決策</p>
+              <p class="case-solution-text">現状の組織の問題点・将来的な問題点をあぶり出し、昇格・昇給ルール・賃金の決定方法を確認しながら6か月で制度を完成。管理職への説明会は当事務所が実施し、一般社員への説明会は人事部門が進行、質問対応を当事務所が担当した。</p>
+              <div class="case-result-box"><p class="case-result-label">■ 結果</p><p class="case-result-text">現状分析から新制度への移行まで一貫してサポートし、社員が腹落ちできる制度が完成。IPO審査対応できる人事評価体制を実現した。</p></div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-cta-section">
+      <div class="contact-cta-bg" aria-hidden="true">
+        <img class="contact-cta-bg-img" src="images/cta-bg.jpg" width="1920" height="800" alt="">
+      </div>
+      <div class="contact-cta-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="contact-cta-inner">
+          <div class="contact-cta-text">
+            <p class="contact-cta-sub">似た課題をお持ちの方はご相談ください</p>
+            <h2 class="contact-cta-title">無料相談受付中</h2>
+            <p class="contact-cta-desc">事例に記載のない課題もお気軽にご相談ください。</p>
+          </div>
+          <div class="contact-cta-buttons">
+            <a href="tel:0368903248" class="btn btn-tel"><i class="fas fa-phone-alt"></i><span><small>電話でのお問合せ（平日 9:00〜18:00）</small>03-6890-3248</span></a>
+            <a href="contact.html" class="btn btn-contact-mail"><i class="fas fa-envelope"></i><span><small>メール・フォームでのお問合せ（24時間受付）</small>お問合せフォームへ</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container footer-main-inner"><div class="footer-brand"><div class="footer-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address></div><nav class="footer-nav"><div class="footer-nav-col"><h3 class="footer-nav-heading">サービス</h3><ul><li><a href="business.html#risk">リスクコンサルティング</a></li><li><a href="business.html#ipo">IPO支援</a></li><li><a href="business.html#outsourcing">人事労務アウトソーシング</a></li><li><a href="business.html#dispatch">派遣・職業紹介許可申請</a></li><li><a href="business.html#subsidy">助成金サポート</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">事務所</h3><ul><li><a href="about.html">事務所紹介</a></li><li><a href="cases.html">解決事例</a></li><li><a href="price.html">費用一覧</a></li><li><a href="qa.html">よくある質問</a></li><li><a href="column.html">コラム</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">お問合せ</h3><ul><li><a href="contact.html">お問合せフォーム</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></nav></div></div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p><ul class="footer-links"><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></div>
+  </footer>
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>

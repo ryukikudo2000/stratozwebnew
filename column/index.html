@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>コラム｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="社会保険労務士法人ストラテジーのコラムページです。人事労務・法改正・助成金・IPO支援に関する最新情報をわかりやすく解説しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ---- Search + Filter Bar ---- */
+    .col-list-controls {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      align-items: center; justify-content: space-between;
+      margin-bottom: 36px;
+    }
+    .col-search-wrap {
+      position: relative; flex: 1; min-width: 220px; max-width: 360px;
+    }
+    .col-search-wrap i {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--color-text-muted); font-size: 0.9rem;
+    }
+    .col-search-input {
+      width: 100%; padding: 11px 16px 11px 40px;
+      border: 1px solid var(--color-border); border-radius: 100px;
+      font-family: var(--font-sans); font-size: 0.9rem;
+      color: var(--color-text); outline: none; transition: var(--transition);
+      background: var(--color-white);
+    }
+    .col-search-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(26,58,107,0.08); }
+    .col-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 18px; border: 2px solid var(--color-border); border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; color: var(--color-text-light);
+      background: var(--color-white); cursor: pointer; transition: var(--transition);
+      white-space: nowrap;
+    }
+    .filter-btn:hover, .filter-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+
+    /* ---- Featured article ---- */
+    .featured-column {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: var(--color-white); border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md); margin-bottom: 56px; cursor: pointer;
+      transition: var(--transition);
+    }
+    .featured-column:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .featured-col-img {
+      min-height: 280px; background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-light) 100%);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .featured-col-img img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-col-img i { font-size: 5rem; color: rgba(255,255,255,0.22); }
+    .featured-col-body { padding: 44px 40px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+    .featured-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; background: var(--color-accent); color: #fff; border-radius: 2px; width: fit-content; }
+    .featured-col-title { font-size: 1.25rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-serif); line-height: 1.5; }
+    .featured-col-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .featured-col-date { font-size: 0.8rem; color: var(--color-text-muted); }
+    .featured-col-excerpt { font-size: 0.88rem; color: var(--color-text-light); line-height: 1.6; }
+
+    /* ---- Card Grid ---- */
+    .col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 56px; }
+    .col-card {
+      background: var(--color-white); border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm); transition: var(--transition);
+      display: flex; flex-direction: column; cursor: pointer;
+    }
+    .col-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .col-card-img {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      position: relative;
+    }
+    .col-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .col-card-img i { font-size: 2.8rem; color: rgba(255,255,255,0.25); }
+    .col-card-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .col-card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .col-cat-badge {
+      font-size: 0.68rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 2px; color: #fff; white-space: nowrap;
+    }
+    .cat-law        { background: #2a6ebb; }
+    .cat-risk       { background: #c0392b; }
+    .cat-ipo        { background: #1a7a4a; }
+    .cat-outsourcing{ background: #7d4ec8; }
+    .cat-subsidy    { background: #c8782b; }
+    .cat-hr         { background: #2b8fc8; }
+    .cat-notice     { background: #888; }
+    .col-card-date { font-size: 0.75rem; color: var(--color-text-muted); }
+    .col-card-title { font-size: 0.93rem; font-weight: 700; color: var(--color-primary); line-height: 1.5; flex: 1; }
+    .col-card-excerpt { font-size: 0.82rem; color: var(--color-text-light); line-height: 1.5; }
+    .col-read-more {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700;
+      color: var(--color-accent); margin-top: auto; transition: var(--transition);
+    }
+    .col-read-more:hover { gap: 10px; }
+
+    /* ---- Empty / Loading ---- */
+    .col-empty { text-align: center; padding: 80px 20px; color: var(--color-text-muted); }
+    .col-empty i { font-size: 3rem; display: block; margin-bottom: 16px; }
+    .col-loading { text-align: center; padding: 60px; color: var(--color-text-muted); }
+
+    /* ---- Pagination ---- */
+    .col-pagination { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .page-btn {
+      width: 40px; height: 40px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); background: var(--color-white);
+      font-size: 0.85rem; font-weight: 700; color: var(--color-text-light);
+      cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center;
+    }
+    .page-btn:hover, .page-btn.active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+    .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ---- Results count ---- */
+    .col-result-info { font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 12px; }
+
+    @media (max-width: 1024px) { .col-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .col-grid { grid-template-columns: 1fr; }
+      .featured-column { grid-template-columns: 1fr; }
+      .featured-col-img { min-height: 200px; }
+      .featured-col-body { padding: 28px 24px; }
+      .col-list-controls { flex-direction: column; align-items: stretch; }
+      .col-search-wrap { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <div class="header-info">
+          <span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span>
+          <span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span>
+          <span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span>
+        </div>
+        <a href="../contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container header-main-inner">
+        <div class="site-logo">
+          <a href="../index.html">
+            <img src="../images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img">
+            <span class="logo-ja">社会保険労務士法人ストラテジー</span>
+          </a>
+        </div>
+        <nav class="global-nav" id="global-nav">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="../index.html"><span class="nav-en">Home</span></a></li>
+            <li class="nav-item"><a href="../business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+            <li class="nav-item"><a href="../cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+            <li class="nav-item"><a href="../price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+            <li class="nav-item"><a href="../about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+            <li class="nav-item"><a href="../qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+            <li class="nav-item active"><a href="index.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+          </ul>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    <div class="mobile-logo">
+      <img src="../images/logo-transparent.png" alt="STRATOZ" class="logo-img">
+      <span class="logo-ja">社会保険労務士法人ストラテジー</span>
+    </div>
+    <ul class="mobile-nav-list">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../business.html">Business Outline <span>業務内容</span></a></li>
+      <li><a href="../cases.html">Case Example <span>解決事例</span></a></li>
+      <li><a href="../price.html">Price List <span>費用一覧</span></a></li>
+      <li><a href="../about.html">About Us <span>事務所紹介</span></a></li>
+      <li><a href="../qa.html">Q&amp;A <span>よくある質問</span></a></li>
+      <li><a href="index.html">Column <span>コラム</span></a></li>
+    </ul>
+    <div class="mobile-nav-contact">
+      <a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a>
+      <a href="../contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a>
+    </div>
+  </nav>
+
+  <!-- ==================== MAIN ==================== -->
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="../images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>コラム</span></div>
+        <p class="page-hero-en">Column &amp; Blog</p>
+        <h1 class="page-hero-title">コラム</h1>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+
+        <!-- Section intro（画像＋テキスト） -->
+        <div class="section-split column-page-intro">
+          <div class="section-split__media">
+            <div class="image-card">
+              <img class="section-image" src="../images/column-insight.jpg" width="800" height="600" alt="コラム・読み物のイメージ">
+            </div>
+          </div>
+          <div class="section-split__text">
+            <p class="section-label">Latest Articles</p>
+            <h2 class="section-title">人事労務コラム</h2>
+            <p class="section-split__lead">
+              法改正・リスク対策・IPO支援・助成金に関する最新情報を専門家が解説します。キーワード検索・カテゴリ絞り込みでお読みいただけます。
+            </p>
+          </div>
+        </div>
+
+        <!-- Featured article -->
+        <div id="featured-area"></div>
+
+        <!-- Controls: search + filter -->
+        <div class="col-list-controls">
+          <div class="col-search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="col-search" class="col-search-input" placeholder="キーワードで検索...">
+          </div>
+          <div class="col-filter" id="col-filter">
+            <button class="filter-btn active" data-cat="all">すべて</button>
+            <button class="filter-btn" data-cat="law">法改正情報</button>
+            <button class="filter-btn" data-cat="risk">リスク対策</button>
+            <button class="filter-btn" data-cat="ipo">IPO支援</button>
+            <button class="filter-btn" data-cat="outsourcing">アウトソーシング</button>
+            <button class="filter-btn" data-cat="subsidy">助成金</button>
+            <button class="filter-btn" data-cat="hr">人事制度</button>
+            <button class="filter-btn" data-cat="notice">お知らせ</button>
+          </div>
+        </div>
+
+        <p class="col-result-info" id="result-info"></p>
+
+        <!-- Article grid -->
+        <div id="col-grid" class="col-grid">
+          <div class="col-loading"><i class="fas fa-spinner fa-spin" style="font-size:2rem;"></i><p style="margin-top:12px;">読み込み中...</p></div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="col-pagination" id="col-pagination"></div>
+
+      </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="contact-cta-section">
+      <div class="contact-cta-bg" aria-hidden="true">
+        <img class="contact-cta-bg-img" src="../images/cta-bg.jpg" width="1920" height="800" alt="">
+      </div>
+      <div class="contact-cta-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="contact-cta-inner">
+          <div class="contact-cta-text">
+            <p class="contact-cta-sub">Free Consultation</p>
+            <h2 class="contact-cta-title">お気軽にご相談ください</h2>
+            <p class="contact-cta-desc">
+              人事労務に関するご不安・ご疑問は、まず無料相談からどうぞ。<br>
+              専門家が貴社の状況をお聞きし、最適な対応をご提案します。
+            </p>
+          </div>
+          <div class="contact-cta-buttons">
+            <a href="../contact.html" class="btn btn-contact-mail"><i class="fas fa-envelope"></i><span><small>メール・フォーム（24時間受付）</small>無料相談・お問合せ</span></a>
+            <a href="tel:0368903248" class="btn btn-tel"><i class="fas fa-phone-alt"></i><span><small>電話（平日 9:00〜18:00）</small>03-6890-3248</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="container footer-main-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="../images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img">
+            <span class="logo-ja">社会保険労務士法人ストラテジー</span>
+          </div>
+          <address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address>
+        </div>
+        <nav class="footer-nav">
+          <div class="footer-nav-col">
+            <h3 class="footer-nav-heading">サービス</h3>
+            <ul>
+              <li><a href="../business.html#risk">リスクコンサルティング</a></li>
+              <li><a href="../business.html#ipo">IPO支援</a></li>
+              <li><a href="../business.html#outsourcing">人事労務アウトソーシング</a></li>
+              <li><a href="../business.html#dispatch">派遣・職業紹介許可申請</a></li>
+              <li><a href="../business.html#subsidy">助成金サポート</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <h3 class="footer-nav-heading">事務所</h3>
+            <ul>
+              <li><a href="../about.html">事務所紹介</a></li>
+              <li><a href="../cases.html">解決事例</a></li>
+              <li><a href="../price.html">費用一覧</a></li>
+              <li><a href="../qa.html">よくある質問</a></li>
+              <li><a href="index.html">コラム</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <h3 class="footer-nav-heading">お問合せ</h3>
+            <ul>
+              <li><a href="../contact.html">お問合せフォーム</a></li>
+              <li><a href="../privacy.html">プライバシーポリシー</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p>
+        <ul class="footer-links"><li><a href="../privacy.html">プライバシーポリシー</a></li></ul>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="../js/main.js"></script>
+  <script>
+  /* ============================================================
+     Column List Page – JS
+  ============================================================ */
+  (function () {
+    const LIMIT = 9;
+
+    let allArticles  = [];
+    let filtered     = [];
+    let currentPage  = 1;
+    let currentCat   = 'all';
+    let searchQuery  = '';
+
+    const gridEl      = document.getElementById('col-grid');
+    const featuredEl  = document.getElementById('featured-area');
+    const paginEl     = document.getElementById('col-pagination');
+    const resultEl    = document.getElementById('result-info');
+    const searchInput = document.getElementById('col-search');
+
+    /* ---- Category badge class ---- */
+    const catClass = {
+      law: 'cat-law', risk: 'cat-risk', ipo: 'cat-ipo',
+      outsourcing: 'cat-outsourcing', subsidy: 'cat-subsidy',
+      hr: 'cat-hr', notice: 'cat-notice'
+    };
+
+    /* ---- Format date ---- */
+    function fmtDate(str) {
+      if (!str) return '';
+      const d = new Date(str);
+      if (isNaN(d)) return str;
+      return d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    /* ---- Build post URL (個別ページは post.html?slug=xxx で統一) ---- */
+    function postUrl(slug) {
+      return 'post.html?slug=' + encodeURIComponent(slug);
+    }
+
+    /* ---- Eyecatch HTML ---- */
+    function eyecatchHtml(article, large) {
+      const size = large ? 'min-height:280px;' : '';
+      if (article.eyecatch_url) {
+        return `<div class="${large ? 'featured-col-img' : 'col-card-img'}" style="${size}"><img src="${article.eyecatch_url}" alt="${article.title}" loading="lazy"></div>`;
+      }
+      const icon = article.eyecatch_icon || 'fas fa-newspaper';
+      return `<div class="${large ? 'featured-col-img' : 'col-card-img'}" style="${size}"><i class="${icon}"></i></div>`;
+    }
+
+    /* ---- Render featured article ---- */
+    function renderFeatured() {
+      const art = allArticles.find(a => a.featured && a.status === 'published');
+      if (!art) { featuredEl.innerHTML = ''; return; }
+      featuredEl.innerHTML = `
+        <a href="${postUrl(art.slug)}" style="text-decoration:none;">
+          <div class="featured-column" data-aos="fade-up">
+            ${eyecatchHtml(art, true)}
+            <div class="featured-col-body">
+              <span class="featured-badge">注目記事</span>
+              <h2 class="featured-col-title">${art.title}</h2>
+              <div class="featured-col-meta">
+                <span class="col-cat-badge ${catClass[art.category] || 'cat-notice'}">${art.category_label || art.category}</span>
+                <span class="featured-col-date"><i class="far fa-calendar-alt" style="margin-right:4px;"></i>${fmtDate(art.published_date)}</span>
+              </div>
+              <p class="featured-col-excerpt">${art.excerpt || ''}</p>
+              <span class="btn btn-outline" style="font-size:0.9rem;margin-top:8px;width:fit-content;">続きを読む <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        </a>`;
+    }
+
+    /* ---- Render article cards ---- */
+    function renderGrid() {
+      const start = (currentPage - 1) * LIMIT;
+      const slice = filtered.slice(start, start + LIMIT);
+
+      resultEl.textContent = allArticles.length === 0
+        ? ''
+        : `${filtered.length} 件の記事が見つかりました`;
+
+      if (filtered.length === 0) {
+        const emptyMsg = allArticles.length === 0
+          ? '記事はまだありません。'
+          : '該当する記事が見つかりませんでした。';
+        const emptyIcon = allArticles.length === 0 ? 'fa-newspaper' : 'fa-search';
+        gridEl.innerHTML = `<div class="col-empty" style="grid-column:1/-1;"><i class="fas ${emptyIcon}"></i><p>${emptyMsg}</p></div>`;
+        return;
+      }
+
+      gridEl.innerHTML = slice.map(art => `
+        <a href="${postUrl(art.slug)}" style="text-decoration:none;">
+          <article class="col-card">
+            ${eyecatchHtml(art, false)}
+            <div class="col-card-body">
+              <div class="col-card-meta">
+                <span class="col-cat-badge ${catClass[art.category] || 'cat-notice'}">${art.category_label || art.category}</span>
+                <span class="col-card-date"><i class="far fa-calendar-alt" style="margin-right:3px;"></i>${fmtDate(art.published_date)}</span>
+              </div>
+              <h3 class="col-card-title">${art.title}</h3>
+              <p class="col-card-excerpt">${(art.excerpt || '').slice(0, 80)}${(art.excerpt || '').length > 80 ? '…' : ''}</p>
+              <span class="col-read-more">続きを読む <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </article>
+        </a>
+      `).join('');
+    }
+
+    /* ---- Render pagination ---- */
+    function renderPagination() {
+      const totalPages = Math.ceil(filtered.length / LIMIT);
+      if (totalPages <= 1) { paginEl.innerHTML = ''; return; }
+      let html = '';
+      html += `<button class="page-btn" id="prev-page" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+      for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      html += `<button class="page-btn" id="next-page" ${currentPage === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+      paginEl.innerHTML = html;
+      paginEl.querySelectorAll('[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => { currentPage = parseInt(btn.dataset.page); renderAll(); scrollToGrid(); });
+      });
+      const prevBtn = document.getElementById('prev-page');
+      const nextBtn = document.getElementById('next-page');
+      if (prevBtn) prevBtn.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderAll(); scrollToGrid(); } });
+      if (nextBtn) nextBtn.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderAll(); scrollToGrid(); } });
+    }
+
+    function scrollToGrid() {
+      gridEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ---- Apply filter + search ---- */
+    function applyFilter() {
+      currentPage = 1;
+      filtered = allArticles.filter(a => {
+        if (a.status !== 'published') return false;
+        if (currentCat !== 'all' && a.category !== currentCat) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const haystack = (a.title + ' ' + a.excerpt + ' ' + (a.tags || '')).toLowerCase();
+          if (!haystack.includes(q)) return false;
+        }
+        return true;
+      });
+    }
+
+    /* ---- Render everything ---- */
+    function renderAll() {
+      renderGrid();
+      renderPagination();
+    }
+
+    /* ---- Normalize article from admin format (column-posts) to list format ---- */
+    function normalizeArticle(a) {
+      return {
+        slug: a.slug || ('post-' + (a.id || '')),
+        title: a.title || '',
+        published_date: a.published_date || a.date || '',
+        eyecatch_url: a.eyecatch_url || a.thumbnail || '',
+        excerpt: a.excerpt || (a.body ? a.body.replace(/<[^>]+>/g, '').slice(0, 120) + '…' : ''),
+        category: a.category || 'notice',
+        category_label: a.category_label || 'お知らせ',
+        status: a.status || 'published',
+        featured: a.featured || false,
+        eyecatch_icon: a.eyecatch_icon || 'fas fa-newspaper',
+        tags: a.tags || ''
+      };
+    }
+
+    /* ---- Fetch all published articles (JSON file or localStorage) ---- */
+    async function loadArticles() {
+      try {
+        let rawList = [];
+        const res = await fetch('../data/column-posts.json');
+        if (res.ok) {
+          const data = await res.json();
+          rawList = Array.isArray(data) ? data : (data.data || []);
+        }
+        if (rawList.length === 0) {
+          try {
+            const stored = localStorage.getItem('columnPosts');
+            rawList = stored ? JSON.parse(stored) : [];
+          } catch (e) { rawList = []; }
+        }
+        allArticles = rawList
+          .map(normalizeArticle)
+          .filter(a => a.status === 'published')
+          .sort((a, b) => new Date(b.published_date) - new Date(a.published_date));
+
+        renderFeatured();
+        applyFilter();
+        renderAll();
+      } catch (e) {
+        gridEl.innerHTML = `<div class="col-empty" style="grid-column:1/-1;"><i class="fas fa-exclamation-circle"></i><p>記事の読み込みに失敗しました。</p></div>`;
+      }
+    }
+
+    /* ---- Filter buttons ---- */
+    document.getElementById('col-filter').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.dataset.cat;
+      applyFilter();
+      renderAll();
+    });
+
+    /* ---- Search ---- */
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        searchQuery = searchInput.value.trim();
+        applyFilter();
+        renderAll();
+      }, 300);
+    });
+
+    /* ---- Init ---- */
+    loadArticles();
+  })();
+  </script>
+</body>
+</html>

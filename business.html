@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>業務内容｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="リスクコンサルティング、IPO支援、人事労務アウトソーシング、派遣・職業紹介許可申請、助成金サポートなど、社会保険労務士法人ストラテジーの業務内容をご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .service-nav { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; justify-content: center; }
+    .tab-btn {
+      padding: 10px 24px; border: 2px solid var(--color-border); border-radius: 100px;
+      font-size: 0.88rem; font-weight: 700; color: var(--color-text-light);
+      background: var(--color-white); cursor: pointer; transition: var(--transition);
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white);
+    }
+    .service-detail {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+      padding: 60px 0; border-bottom: 1px solid var(--color-border);
+    }
+    .service-detail:last-child { border-bottom: none; }
+    .service-detail.reverse { }
+    .service-detail-badge {
+      display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px;
+    }
+    .service-detail-badge .icon-wrap {
+      width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+      border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;
+    }
+    .service-detail-badge .icon-wrap i { color: #fff; font-size: 1.2rem; }
+    .service-detail-badge .service-no { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: var(--color-accent); }
+    .service-detail-title { font-size: 1.6rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-serif); margin-bottom: 20px; }
+    .service-detail-lead { font-size: 1rem; color: var(--color-text-light); line-height: 1.6; margin-bottom: 16px; }
+    .service-detail-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .service-detail-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; line-height: 1.5; }
+    .service-detail-list li i { color: var(--color-accent); margin-top: 3px; font-size: 0.8rem; }
+    .service-visual {
+      background: var(--color-bg-light); border-radius: var(--radius-lg);
+      padding: 40px; display: flex; flex-direction: column; gap: 20px;
+      border: 1px solid var(--color-border);
+    }
+    .service-visual-title { font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .service-flow { display: flex; flex-direction: column; gap: 0; }
+    .flow-step {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 0; position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: ''; position: absolute; left: 19px; top: 44px; width: 2px; height: calc(100% - 20px);
+      background: var(--color-border);
+    }
+    .flow-num {
+      width: 40px; height: 40px; min-width: 40px;
+      background: var(--color-primary); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; z-index: 1;
+    }
+    .flow-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--color-primary); margin-bottom: 4px; }
+    .flow-content p { font-size: 0.84rem; color: var(--color-text-light); line-height: 1.5; }
+    @media (max-width: 768px) {
+      .service-detail { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
+    }
+
+    /* ========== サービス目次ナビゲーション ========== */
+    .service-toc-wrap {
+      background: #f4f5f7;
+      border-bottom: 1px solid var(--color-border);
+      padding: 32px 0;
+    }
+    .service-toc {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .service-toc-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 2px solid var(--color-border);
+      border-radius: 12px;
+      padding: 18px 20px 14px;
+      min-width: 140px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--color-primary);
+      font-weight: 700;
+      transition: all 0.22s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      cursor: pointer;
+    }
+    .service-toc-btn i {
+      font-size: 1.4rem;
+      color: var(--color-accent);
+      margin-bottom: 2px;
+    }
+    .service-toc-btn .toc-no {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      font-family: 'Montserrat', var(--font-sans);
+    }
+    .service-toc-btn .toc-label {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--color-primary);
+    }
+    .service-toc-btn:hover,
+    .service-toc-btn:focus {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      box-shadow: 0 6px 18px rgba(11,40,89,0.18);
+      transform: translateY(-3px);
+    }
+    .service-toc-btn:hover i,
+    .service-toc-btn:hover .toc-no,
+    .service-toc-btn:hover .toc-label,
+    .service-toc-btn:focus i,
+    .service-toc-btn:focus .toc-no,
+    .service-toc-btn:focus .toc-label {
+      color: #fff;
+    }
+    /* スマホ：2列表示 */
+    @media (max-width: 600px) {
+      .service-toc {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .service-toc-btn {
+        min-width: unset;
+        padding: 14px 12px 12px;
+      }
+      .service-toc-btn i { font-size: 1.2rem; }
+      .service-toc-btn .toc-label { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <div class="header-info">
+          <span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span>
+          <span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span>
+          <span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span>
+        </div>
+        <a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container header-main-inner">
+        <div class="site-logo"><a href="index.html"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></a></div>
+        <nav class="global-nav" id="global-nav">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="index.html"><span class="nav-en">Home</span></a></li>
+            <li class="nav-item active"><a href="business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+            <li class="nav-item"><a href="cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+            <li class="nav-item"><a href="price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+            <li class="nav-item"><a href="about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+            <li class="nav-item"><a href="qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+            <li class="nav-item"><a href="column.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+          </ul>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    <div class="mobile-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div>
+    <ul class="mobile-nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="business.html">Business Outline <span>業務内容</span></a></li>
+      <li><a href="cases.html">Case Example <span>解決事例</span></a></li>
+      <li><a href="price.html">Price List <span>費用一覧</span></a></li>
+      <li><a href="about.html">About Us <span>事務所紹介</span></a></li>
+      <li><a href="qa.html">Q&amp;A <span>よくある質問</span></a></li>
+      <li><a href="column.html">Column <span>コラム</span></a></li>
+    </ul>
+    <div class="mobile-nav-contact">
+      <a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a>
+      <a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>業務内容</span></div>
+        <p class="page-hero-en">Business Outline</p>
+        <h1 class="page-hero-title">業務内容</h1>
+      </div>
+    </div>
+
+    <!-- サービス目次ナビゲーション -->
+    <div class="service-toc-wrap">
+      <div class="container">
+        <nav class="service-toc" aria-label="サービス目次">
+          <a href="#risk" class="service-toc-btn">
+            <i class="fas fa-shield-alt"></i>
+            <span class="toc-no">01</span>
+            <span class="toc-label">リスクコンサルティング</span>
+          </a>
+          <a href="#ipo" class="service-toc-btn">
+            <i class="fas fa-chart-line"></i>
+            <span class="toc-no">02</span>
+            <span class="toc-label">IPO支援事業</span>
+          </a>
+          <a href="#outsourcing" class="service-toc-btn">
+            <i class="fas fa-users-cog"></i>
+            <span class="toc-no">03</span>
+            <span class="toc-label">人事労務<br>アウトソーシング</span>
+          </a>
+          <a href="#dispatch" class="service-toc-btn">
+            <i class="fas fa-file-signature"></i>
+            <span class="toc-no">04</span>
+            <span class="toc-label">派遣・職業紹介<br>許可申請</span>
+          </a>
+          <a href="#subsidy" class="service-toc-btn">
+            <i class="fas fa-yen-sign"></i>
+            <span class="toc-no">05</span>
+            <span class="toc-label">助成金サポート</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Our Services</p>
+          <h2 class="section-title">提供サービス一覧</h2>
+          <p class="section-desc">人事労務に関わるあらゆる課題に対応します。</p>
+        </div>
+
+        <!-- Service: Risk -->
+        <div class="service-detail" id="risk">
+          <div class="service-text" data-aos="fade-up">
+            <div class="service-detail-badge">
+              <div class="icon-wrap"><i class="fas fa-shield-alt"></i></div>
+              <span class="service-no">SERVICE 01</span>
+            </div>
+            <h2 class="service-detail-title">リスクコンサルティング</h2>
+            <p class="service-detail-lead">
+              労働紛争・高い離職率・従業員の不満——これらは事前のチェックと適切な対応で未然に防ぐことができます。近年の「働き方改革」への対応も含め、法令遵守（コンプライアンス）の徹底と強固な労使関係の構築により、従業員満足度の向上・離職防止・人材確保を実現します。
+            </p>
+            <p class="service-detail-lead" style="font-size:0.88rem; margin-top:-12px;">
+              <strong>対応法令：</strong>労働基準法 / 労災保険法 / 雇用保険法 / 労働保険徴収法 / 労働安全衛生法 / 健康保険法 / 厚生年金保険法 / 国民年金法
+            </p>
+            <ul class="service-detail-list">
+              <li><i class="fas fa-check-circle"></i>就業規則・各種規程の新規作成および定期メンテナンス（最新法改正との整合性確保）</li>
+              <li><i class="fas fa-check-circle"></i>就業規則の労働基準監督署への届出と社内周知（掲示・書面交付・電子データ提供）</li>
+              <li><i class="fas fa-check-circle"></i>賃金規程の見直し（違反発覚時は最大2年分の遡及支払リスクあり）</li>
+              <li><i class="fas fa-check-circle"></i>IPO準備会社向け労務デューデリジェンス支援</li>
+              <li><i class="fas fa-check-circle"></i>ハラスメント防止体制の構築・社内研修の実施</li>
+              <li><i class="fas fa-check-circle"></i>法改正への事前対応・定期的なリスク点検</li>
+            </ul>
+
+            <!-- Training Block -->
+            <div class="risk-training-block" style="background:var(--color-bg-light); border-radius:var(--radius-md); padding:24px; margin-bottom:24px; border-left:4px solid var(--color-accent);">
+              <h3 style="font-size:1rem; font-weight:700; color:var(--color-primary); margin-bottom:12px;"><i class="fas fa-chalkboard-teacher" style="color:var(--color-accent); margin-right:8px;"></i>研修・トレーニング（カスタマイズ対応）</h3>
+              <ul class="service-detail-list">
+                <li><i class="fas fa-check-circle"></i>管理職向けマネジメント研修</li>
+                <li><i class="fas fa-check-circle"></i>問題解決力強化（ロジカルシンキング）研修</li>
+                <li><i class="fas fa-check-circle"></i>ハラスメント防止セミナー</li>
+                <li><i class="fas fa-check-circle"></i>営業・コミュニケーションスキル研修<br><span style="font-size:0.82rem; color:var(--color-text-muted); padding-left:18px;">（ロールプレイ・プレゼンテーション・クロージングテクニック）</span></li>
+              </ul>
+            </div>
+
+            <a href="contact.html" class="btn btn-outline">このサービスについて相談する <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="service-visual" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-visual-title">サービスフロー</div>
+            <div class="service-flow">
+              <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>初回ヒアリング・現状把握</h4><p>現状の課題・リスク箇所を丁寧にヒアリングします。</p></div></div>
+              <div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>労務診断レポートの作成</h4><p>リスク度合いを可視化したレポートをご提出します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>改善策のご提案</h4><p>優先度を踏まえた実行可能な改善計画を提案します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>規程整備・体制構築</h4><p>就業規則・賃金規程を整備し、労基署への届出も代行します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>継続モニタリング・法改正対応</h4><p>法改正のたびに規程を見直し、継続的にサポートします。</p></div></div>
+            </div>
+
+            <!-- Law Coverage -->
+            <div style="margin-top:24px; padding:20px; background:#fff; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+              <p style="font-size:0.8rem; font-weight:700; color:var(--color-text-muted); letter-spacing:0.06em; margin-bottom:12px;">カバーする主な関連法令</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>労働基準法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>労災保険法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>雇用保険法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>労働保険徴収法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>労働安全衛生法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>健康保険法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>厚生年金保険法</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-gavel" style="color:var(--color-accent); font-size:0.65rem;"></i>国民年金法</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service: IPO -->
+        <div class="service-detail" id="ipo">
+          <div class="service-text" data-aos="fade-up">
+            <div class="service-detail-badge">
+              <div class="icon-wrap"><i class="fas fa-chart-line"></i></div>
+              <span class="service-no">SERVICE 02</span>
+            </div>
+            <h2 class="service-detail-title">IPO支援事業</h2>
+            <p class="service-detail-lead">
+              上場審査が厳しくなった現在、万全の人事労務管理体制・各種人事制度・過去債務算定を行います。コンプライアンス厳守を基に、従業員の育成・労務管理・生産性向上の制度策定から運用まで万全にサポートします。
+            </p>
+
+            <!-- 労務デューデリジェンス -->
+            <div class="ipo-block" style="margin-bottom:28px;">
+              <h3 class="ipo-sub-title" style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">労務デューデリジェンス</h3>
+              <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-light); margin-bottom:10px;">
+                労務デューデリジェンスとは、IPO支援の目的で労働法関係の法令遵守状況について行う労務監査のことです。近年のIPO審査では、労務管理体制のコンプライアンスが厳しくチェックされる傾向にあります。
+              </p>
+              <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-light); margin-bottom:10px;">
+                近年、残業手当の未払いや社会保険の未加入、労使間のトラブル問題等の隠れ債務がIPOに大きな影響を及ぼしております。
+              </p>
+              <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-light);">
+                当事務所の労務デューデリジェンスでは、IPOやM&amp;A実施に際し、潜在的な労務リスクを顕在化させ分析することによる、是正や改善のご提案を行います。
+              </p>
+            </div>
+
+            <!-- 過去債務算出 -->
+            <div class="ipo-block" style="margin-bottom:28px;">
+              <h3 class="ipo-sub-title" style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">過去債務算出</h3>
+              <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-light); margin-bottom:10px;">
+                IPO審査では、過去の未払残業手当の精算が求められます。就業規則・賃金規程等の規程が適法かどうか、労働時間の管理が適正かどうか等、基本的な確認を行いながら、潜在的な未払残業手当が存在しないかどうかの確認を行います。
+              </p>
+              <ul class="service-detail-list">
+                <li><i class="fas fa-check-circle"></i>管理監督者の範囲の不適正な適用による潜在的な残業手当の不払いの確認</li>
+                <li><i class="fas fa-check-circle"></i>割増賃金の算出根拠や端数処理誤りによる残業手当不払いの確認</li>
+                <li><i class="fas fa-check-circle"></i>社会保険・雇用保険の未加入リスクの洗い出し</li>
+              </ul>
+            </div>
+
+            <!-- 人事制度策定 -->
+            <div class="ipo-block" style="margin-bottom:28px;">
+              <h3 class="ipo-sub-title" style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">人事制度策定</h3>
+              <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-light);">
+                IPO審査に対応しうる人事制度を策定しご提案します。コンプライアンスを基本としながら、社会的責任も果たせる上場企業にふさわしい、安定した人材確保と定着・育成が実現できる人事制度の構築を目指します。
+              </p>
+            </div>
+
+            <a href="contact.html" class="btn btn-outline">このサービスについて相談する <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="service-visual" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-visual-title">IPO労務支援ロードマップ</div>
+            <div class="service-flow">
+              <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>STEP 1　リスクの洗い出し</h4><p>労務デューデリジェンスにより、潜在的な労務リスクを顕在化・分析します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>STEP 2　リスク回避の対応を検討</h4><p>過去債務の算出を含め、是正・改善策を具体的にご提案します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>STEP 3　人事制度・評価制度・賃金支払いルールの策定</h4><p>上場審査に対応した各種規程・制度を整備します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>STEP 4　人事制度全体の運用についてのご提案</h4><p>制度策定後の運用定着まで継続的にサポートします。</p></div></div>
+              <div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>上場後フォローアップ</h4><p>上場後も継続的な労務管理体制の維持をサポートします。</p></div></div>
+            </div>
+
+            <!-- IPO審査チェックポイント -->
+            <div style="margin-top:24px; padding:20px; background:#fff; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+              <p style="font-size:0.8rem; font-weight:700; color:var(--color-text-muted); letter-spacing:0.06em; margin-bottom:12px;">IPO審査の主なチェックポイント</p>
+              <ul style="display:flex; flex-direction:column; gap:8px;">
+                <li style="font-size:0.82rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;"><i class="fas fa-exclamation-circle" style="color:var(--color-accent); margin-top:2px; font-size:0.75rem;"></i>残業手当・割増賃金の未払い</li>
+                <li style="font-size:0.82rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;"><i class="fas fa-exclamation-circle" style="color:var(--color-accent); margin-top:2px; font-size:0.75rem;"></i>社会保険・雇用保険の未加入</li>
+                <li style="font-size:0.82rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;"><i class="fas fa-exclamation-circle" style="color:var(--color-accent); margin-top:2px; font-size:0.75rem;"></i>管理監督者の範囲の不適切な適用</li>
+                <li style="font-size:0.82rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;"><i class="fas fa-exclamation-circle" style="color:var(--color-accent); margin-top:2px; font-size:0.75rem;"></i>労使間トラブル・隠れ債務の存在</li>
+                <li style="font-size:0.82rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;"><i class="fas fa-exclamation-circle" style="color:var(--color-accent); margin-top:2px; font-size:0.75rem;"></i>就業規則・賃金規程の法令適合性</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service: Outsourcing -->
+        <div class="service-detail" id="outsourcing">
+          <div class="service-text" data-aos="fade-up">
+            <div class="service-detail-badge">
+              <div class="icon-wrap"><i class="fas fa-users-cog"></i></div>
+              <span class="service-no">SERVICE 03</span>
+            </div>
+            <h2 class="service-detail-title">人事労務アウトソーシング事業</h2>
+            <p class="service-detail-lead">
+              会社の安定的な成長にとって、適正な人事総務機能は必要不可欠です。しかし、個人情報の取り扱い等特殊な業務内容であるため属人化しやすく、担当者の急な休職や退職に備え代替要員の育成も必要になることからコストがかかる部門です。
+            </p>
+            <p class="service-detail-lead" style="margin-top:-10px;">
+              人事総務業務を当事務所にお任せいただくことで、以下の3つのメリットが獲得できます。
+            </p>
+
+            <!-- 3メリット -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:28px;">
+              <div style="background:var(--color-bg-light); border-radius:var(--radius-md); padding:16px; text-align:center; border:1px solid var(--color-border);">
+                <i class="fas fa-yen-sign" style="font-size:1.4rem; color:var(--color-accent); display:block; margin-bottom:8px;"></i>
+                <p style="font-size:0.82rem; font-weight:700; color:var(--color-primary); line-height:1.5;">人件費の<br>コストダウン</p>
+              </div>
+              <div style="background:var(--color-bg-light); border-radius:var(--radius-md); padding:16px; text-align:center; border:1px solid var(--color-border);">
+                <i class="fas fa-cogs" style="font-size:1.4rem; color:var(--color-accent); display:block; margin-bottom:8px;"></i>
+                <p style="font-size:0.82rem; font-weight:700; color:var(--color-primary); line-height:1.5;">適正な人事<br>総務機能</p>
+              </div>
+              <div style="background:var(--color-bg-light); border-radius:var(--radius-md); padding:16px; text-align:center; border:1px solid var(--color-border);">
+                <i class="fas fa-bolt" style="font-size:1.4rem; color:var(--color-accent); display:block; margin-bottom:8px;"></i>
+                <p style="font-size:0.82rem; font-weight:700; color:var(--color-primary); line-height:1.5;">迅速な<br>プロサービス</p>
+              </div>
+            </div>
+
+            <!-- 社会保険・労働保険手続 -->
+            <div class="ipo-block" style="margin-bottom:24px;">
+              <h3 style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">社会保険・労働保険手続</h3>
+              <p style="font-size:0.9rem; line-height:1.6; color:var(--color-text-light); margin-bottom:8px;">
+                社会保険・労働保険の手続きには、頻繁に改正される労働関係諸法令に対応しうる、迅速かつ正確な業務遂行が求められています。入社・結婚・出産・育児・介護・労災事故・退職など様々なシーンで発生する手続き業務は、煩雑で理解しにくい内容です。
+              </p>
+              <p style="font-size:0.9rem; line-height:1.7; color:var(--color-text-light);">
+                手続業務は、<strong>電子申請で迅速な対応が可能</strong>な当事務所にお任せください。
+              </p>
+            </div>
+
+            <!-- 給与計算等 -->
+            <div class="ipo-block" style="margin-bottom:24px;">
+              <h3 style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">給与計算等　事務業務代行</h3>
+              <p style="font-size:0.9rem; line-height:1.6; color:var(--color-text-light); margin-bottom:12px;">
+                給与計算業務を取り巻く周辺の法律は法改正が多く業務が煩雑になっています。社会保険・労働保険の手続業務と併せてお任せいただくことで、迅速で正確な給与計算業務をご提供します。
+              </p>
+              <p style="font-size:0.82rem; font-weight:700; color:var(--color-text-muted); margin-bottom:8px;">給与計算代行に含まれるもの</p>
+              <ul class="service-detail-list">
+                <li><i class="fas fa-check-circle"></i>月次給与計算（給与明細発行・保険料改定のお知らせ含む）</li>
+                <li><i class="fas fa-check-circle"></i>勤怠管理・有給休暇管理</li>
+                <li><i class="fas fa-check-circle"></i>人事制度・賃金制度の管理と給与額への正確な反映</li>
+                <li><i class="fas fa-check-circle"></i>賞与計算（賞与明細発行含む）</li>
+                <li><i class="fas fa-check-circle"></i>退職金計算</li>
+              </ul>
+            </div>
+
+            <!-- 助成金・補助金 -->
+            <div class="ipo-block" style="margin-bottom:24px;">
+              <h3 style="font-size:1.05rem; font-weight:700; color:var(--color-primary); border-left:4px solid var(--color-accent); padding-left:12px; margin-bottom:12px;">各種助成金・補助金申請代行</h3>
+              <p style="font-size:0.9rem; line-height:1.6; color:var(--color-text-light); margin-bottom:12px;">
+                様々なお客様のステージやニーズに応じて最適な助成金・補助金をご案内します。融資とは違い返済義務がなく、経営上必要な資金が得られる可能性があります。申請時の手続きが煩雑で支給まで到達できないケースが多い中、当事務所は<strong>診断から受給まで一貫したフルサービス</strong>で申請代行しております。
+              </p>
+              <p style="font-size:0.82rem; font-weight:700; color:var(--color-text-muted); margin-bottom:8px;">対応する雇用関係助成金（主な種類）</p>
+              <ul class="service-detail-list">
+                <li><i class="fas fa-check-circle"></i>従業員の雇用維持を図る場合の助成金</li>
+                <li><i class="fas fa-check-circle"></i>離職者の円滑な労働移動を図る場合の助成金</li>
+                <li><i class="fas fa-check-circle"></i>従業員を新たに雇い入れる場合の助成金</li>
+                <li><i class="fas fa-check-circle"></i>障害者等の雇用環境整備関係の助成金</li>
+                <li><i class="fas fa-check-circle"></i>仕事と家庭の両立に取り組む場合の助成金</li>
+                <li><i class="fas fa-check-circle"></i>キャリアアップ・人材育成関係の助成金</li>
+                <li><i class="fas fa-check-circle"></i>労働時間・賃金・健康確保・勤労者福祉関係の助成金</li>
+              </ul>
+            </div>
+
+            <a href="contact.html" class="btn btn-outline">このサービスについて相談する <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="service-visual" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-visual-title">アウトソーシングのメリット</div>
+            <div class="service-flow">
+              <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>人件費のコストダウン</h4><p>専任担当者の人件費・育成費・代替要員コストを大幅に削減できます。</p></div></div>
+              <div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>属人化リスクの解消</h4><p>担当者の急な休職・退職があっても業務が止まりません。</p></div></div>
+              <div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>法改正への自動対応</h4><p>頻繁な法改正も専門家が常時対応、ミスゼロを実現します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>電子申請で迅速処理</h4><p>電子申請対応で手続きを迅速かつ正確に完了します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>コア業務への集中</h4><p>経営者・管理職が本来業務に専念できる環境を実現します。</p></div></div>
+            </div>
+
+            <!-- 対応業務一覧 -->
+            <div style="margin-top:24px; padding:20px; background:#fff; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+              <p style="font-size:0.8rem; font-weight:700; color:var(--color-text-muted); letter-spacing:0.06em; margin-bottom:12px;">主な対応業務</p>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>社会保険手続き</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>労働保険手続き</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>月次給与計算</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>賞与・退職金計算</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>勤怠・有給管理</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>入退社手続き</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>育児・介護休業手続き</span>
+                <span style="font-size:0.78rem; color:var(--color-text-light); display:flex; align-items:center; gap:4px;"><i class="fas fa-circle" style="color:var(--color-accent); font-size:0.45rem;"></i>助成金申請代行</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service: Haken -->
+        <div class="service-detail" id="dispatch">
+          <div class="service-text" data-aos="fade-up">
+            <div class="service-detail-badge">
+              <div class="icon-wrap"><i class="fas fa-file-signature"></i></div>
+              <span class="service-no">SERVICE 04</span>
+            </div>
+            <h2 class="service-detail-title">労働者派遣事業・職業紹介事業の許可申請</h2>
+            <p class="service-detail-lead">
+              弊社では申請準備打合せを実施し、その後申請書類作成、労働局提出までを一貫して行います。
+            </p>
+            <p class="service-detail-lead" style="margin-top:-10px;">
+              許可申請書類作成には慣れない文言・書式が多く、相当な時間数がかかります。また、労働局への提出は数度足を運ぶことになる場合がほとんどですが、弊社で全て行いますので、企業様の時間的なコストに大きく貢献できます。
+            </p>
+            <p class="service-detail-lead" style="margin-top:-10px;">
+              併せて、現状の労務問題なども解決していきますので、ぜひ一度ご相談ください。
+            </p>
+
+            <!-- 強み：長年のノウハウ -->
+            <div style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light, #1a3a6e) 100%); border-radius:var(--radius-md); padding:20px 24px; margin-bottom:28px; color:#fff;">
+              <p style="font-size:0.82rem; font-weight:700; letter-spacing:0.08em; color:rgba(255,255,255,0.7); margin-bottom:6px;">当事務所の強み</p>
+              <p style="font-size:0.95rem; font-weight:700; line-height:1.7;">長年大規模派遣元で培ったノウハウで、<br>免許更新も含めてトータルサポートします。</p>
+              <p style="font-size:0.85rem; margin-top:8px; color:rgba(255,255,255,0.85); line-height:1.75;">既に許可されている労働者派遣事業・職業紹介事業の免許更新もお任せください。</p>
+            </div>
+
+            <ul class="service-detail-list">
+              <li><i class="fas fa-check-circle"></i>申請準備打合せ・要件確認（財産要件・事務所要件等）</li>
+              <li><i class="fas fa-check-circle"></i>許可申請書類一式の作成（慣れない文言・書式も対応）</li>
+              <li><i class="fas fa-check-circle"></i>労働局への提出・折衝を全件代行</li>
+              <li><i class="fas fa-check-circle"></i>許可証受領後のフォローアップ</li>
+              <li><i class="fas fa-check-circle"></i>許可更新・事業報告書の作成</li>
+              <li><i class="fas fa-check-circle"></i>現状の労務問題の併行解決サポート</li>
+              <li><i class="fas fa-check-circle"></i>同一労働同一賃金対応支援</li>
+            </ul>
+
+            <a href="contact.html" class="btn btn-outline">このサービスについて相談する <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="service-visual" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-visual-title">申請の流れ</div>
+            <div class="service-flow">
+              <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>申請準備打合せ</h4><p>要件確認・財産要件・事務所要件等を詳しくヒアリングします。</p></div></div>
+              <div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>書類作成</h4><p>慣れない文言・書式が多い申請書類一式を当法人が全て作成します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>労働局への提出・対応</h4><p>数度の窓口対応が必要な労働局への提出も全て代行します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>審査（概ね2〜3ヶ月）</h4><p>審査期間中の照会・追加書類対応もサポートします。</p></div></div>
+              <div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>許可証の交付・事業開始</h4><p>許可証受領後、事業開始が可能になります。</p></div></div>
+              <div class="flow-step"><div class="flow-num">6</div><div class="flow-content"><h4>更新・事業報告のサポート</h4><p>許可更新・毎年の事業報告書作成も継続してサポートします。</p></div></div>
+            </div>
+
+            <!-- 対応する許可種別 -->
+            <div style="margin-top:24px; padding:20px; background:#fff; border-radius:var(--radius-sm); border:1px solid var(--color-border);">
+              <p style="font-size:0.8rem; font-weight:700; color:var(--color-text-muted); letter-spacing:0.06em; margin-bottom:12px;">対応する許可申請種別</p>
+              <ul style="display:flex; flex-direction:column; gap:10px;">
+                <li style="font-size:0.85rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;">
+                  <i class="fas fa-id-badge" style="color:var(--color-accent); margin-top:2px; font-size:0.8rem;"></i>
+                  <div><strong style="color:var(--color-primary);">労働者派遣事業</strong><br><span style="font-size:0.78rem;">新規許可申請・許可更新（3年・5年）</span></div>
+                </li>
+                <li style="font-size:0.85rem; color:var(--color-text-light); display:flex; align-items:flex-start; gap:8px;">
+                  <i class="fas fa-handshake" style="color:var(--color-accent); margin-top:2px; font-size:0.8rem;"></i>
+                  <div><strong style="color:var(--color-primary);">有料職業紹介事業</strong><br><span style="font-size:0.78rem;">新規許可申請・許可更新（5年）</span></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service: Subsidy -->
+        <div class="service-detail" id="subsidy">
+          <div class="service-text" data-aos="fade-up">
+            <div class="service-detail-badge">
+              <div class="icon-wrap"><i class="fas fa-yen-sign"></i></div>
+              <span class="service-no">SERVICE 05</span>
+            </div>
+            <h2 class="service-detail-title">助成金サポート</h2>
+            <p class="service-detail-lead">
+              雇用に関する助成金は種類が豊富ですが、要件や申請手続きが複雑です。お客様の状況に合った助成金を選定し、受給可能性の高い申請を代行します。受給実績多数。
+            </p>
+            <ul class="service-detail-list">
+              <li><i class="fas fa-check-circle"></i>キャリアアップ助成金</li>
+              <li><i class="fas fa-check-circle"></i>人材開発支援助成金</li>
+              <li><i class="fas fa-check-circle"></i>両立支援等助成金（育休取得促進）</li>
+              <li><i class="fas fa-check-circle"></i>雇用調整助成金</li>
+              <li><i class="fas fa-check-circle"></i>特定求職者雇用開発助成金</li>
+              <li><i class="fas fa-check-circle"></i>その他、最新の助成金情報をご提供</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline">このサービスについて相談する <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="service-visual" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-visual-title">助成金受給までのステップ</div>
+            <div class="service-flow">
+              <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>無料診断</h4><p>御社に合った助成金を無料でピックアップします。</p></div></div>
+              <div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>事前準備</h4><p>必要な就業規則・賃金規程等を整備します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>申請書類の作成</h4><p>複雑な申請書類を当法人が作成・代行します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>支給申請・審査</h4><p>労働局・ハローワークへ申請します。</p></div></div>
+              <div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>支給決定・入金</h4><p>受給後の報告サポートまで対応します。</p></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact-cta-section">
+      <div class="container">
+        <div class="contact-cta-inner">
+          <div class="contact-cta-text"><p class="contact-cta-sub">まずはお気軽にご相談ください</p><h2 class="contact-cta-title">無料相談受付中</h2><p class="contact-cta-desc">どのサービスが適しているかわからない場合も、<br>お気軽にご相談いただければ最適なプランをご提案します。</p></div>
+          <div class="contact-cta-buttons">
+            <a href="tel:0368903248" class="btn btn-tel"><i class="fas fa-phone-alt"></i><span><small>電話でのお問合せ（平日 9:00〜18:00）</small>03-6890-3248</span></a>
+            <a href="contact.html" class="btn btn-contact-mail"><i class="fas fa-envelope"></i><span><small>メール・フォームでのお問合せ（24時間受付）</small>お問合せフォームへ</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container footer-main-inner">
+      <div class="footer-brand"><div class="footer-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address></div>
+      <nav class="footer-nav"><div class="footer-nav-col"><h3 class="footer-nav-heading">サービス</h3><ul><li><a href="business.html#risk">リスクコンサルティング</a></li><li><a href="business.html#ipo">IPO支援</a></li><li><a href="business.html#outsourcing">人事労務アウトソーシング</a></li><li><a href="business.html#dispatch">派遣・職業紹介許可申請</a></li><li><a href="business.html#subsidy">助成金サポート</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">事務所</h3><ul><li><a href="about.html">事務所紹介</a></li><li><a href="cases.html">解決事例</a></li><li><a href="price.html">費用一覧</a></li><li><a href="qa.html">よくある質問</a></li><li><a href="column.html">コラム</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">お問合せ</h3><ul><li><a href="contact.html">お問合せフォーム</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></nav>
+    </div></div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p><ul class="footer-links"><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></div>
+  </footer>
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+  <script>
+    /* 目次ナビ：スムーズスクロール（固定ヘッダー分オフセット） */
+    document.querySelectorAll('.service-toc-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').replace('#', '');
+        var target = document.getElementById(targetId);
+        if (!target) return;
+        var header = document.getElementById('site-header');
+        var offset = header ? header.offsetHeight + 16 : 80;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  </script>
+</html>

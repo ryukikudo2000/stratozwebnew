@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>お問合せ｜社会保険労務士法人ストラテジー</title>
+  <meta name="description" content="社会保険労務士法人ストラテジーへのお問合せページです。人事労務・助成金・IPO支援など、お気軽にご相談ください。初回相談無料。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-layout { display: grid; grid-template-columns: 1fr 420px; gap: 56px; align-items: start; }
+    .contact-form-wrap { background: var(--color-white); border-radius: var(--radius-lg); border: 1px solid var(--color-border); padding: 48px; box-shadow: var(--shadow-sm); }
+    .contact-form-wrap h2 { font-size: 1.3rem; font-weight: 700; color: var(--color-primary); margin-bottom: 32px; font-family: var(--font-serif); padding-bottom: 16px; border-bottom: 2px solid var(--color-accent); }
+    .form-group { margin-bottom: 24px; }
+    .form-label { display: block; font-size: 0.88rem; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+    .form-label .required { display: inline-block; font-size: 0.7rem; background: #e74c3c; color: #fff; padding: 1px 6px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+    .form-label .optional { display: inline-block; font-size: 0.7rem; background: var(--color-border); color: var(--color-text-muted); padding: 1px 6px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 13px 16px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 0.95rem;
+      color: var(--color-text); background: var(--color-white); transition: var(--transition);
+      outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(26,58,107,0.08); }
+    .form-input.error, .form-textarea.error, .form-select.error { border-color: #e74c3c; }
+    .form-textarea { min-height: 140px; resize: vertical; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 44px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .privacy-agree { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: var(--color-text-light); line-height: 1.5; }
+    .privacy-agree input[type="checkbox"] { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--color-primary); }
+    .privacy-agree a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+    .btn-submit {
+      width: 100%; padding: 18px; background: var(--color-primary); color: #fff;
+      border: none; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 28px;
+    }
+    .btn-submit:hover { background: var(--color-primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .form-message { border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 24px; font-size: 0.9rem; line-height: 1.5; display: none; }
+    .form-error { background: #fdf0ef; border: 1px solid #e74c3c; color: #c0392b; }
+    .form-success { background: #f0fff4; border: 1px solid #2ecc71; color: #1a7a4a; }
+    .contact-info-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .contact-info-card {
+      background: var(--color-white); border-radius: var(--radius-lg); padding: 28px;
+      border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+    }
+    .contact-info-card-title { font-size: 0.85rem; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .contact-info-card-title i { color: var(--color-accent); }
+    .contact-tel-big { font-size: 1.8rem; font-weight: 900; color: var(--color-primary); display: flex; align-items: center; gap: 10px; line-height: 1.2; }
+    .contact-tel-big a { color: inherit; }
+    .contact-tel-big a:hover { color: var(--color-accent); }
+    .contact-tel-big i { font-size: 1.4rem; color: var(--color-accent); }
+    .contact-hours { margin-top: 10px; font-size: 0.85rem; color: var(--color-text-light); line-height: 1.5; }
+    .contact-access-list { display: flex; flex-direction: column; gap: 10px; }
+    .contact-access-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--color-text); line-height: 1.5; }
+    .contact-access-item i { color: var(--color-accent); margin-top: 3px; font-size: 0.9rem; }
+    @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .contact-form-wrap { padding: 28px 20px; } .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="header-top"><div class="container header-top-inner"><div class="header-info"><span class="header-tel"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></span><span class="header-hours"><i class="far fa-clock"></i>受付時間：9:00〜18:00</span><span class="header-holiday"><i class="fas fa-calendar-times"></i>定休日：土・日・祝・年末年始</span></div><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></div>
+    <div class="header-main"><div class="container header-main-inner">
+      <div class="site-logo"><a href="index.html"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></a></div>
+      <nav class="global-nav" id="global-nav"><ul class="nav-list">
+        <li class="nav-item"><a href="index.html"><span class="nav-en">Home</span></a></li>
+        <li class="nav-item"><a href="business.html"><span class="nav-en">Business Outline</span><span class="nav-ja">業務内容</span></a></li>
+        <li class="nav-item"><a href="cases.html"><span class="nav-en">Case Example</span><span class="nav-ja">解決事例</span></a></li>
+        <li class="nav-item"><a href="price.html"><span class="nav-en">Price List</span><span class="nav-ja">費用一覧</span></a></li>
+        <li class="nav-item"><a href="about.html"><span class="nav-en">About Us</span><span class="nav-ja">事務所紹介</span></a></li>
+        <li class="nav-item"><a href="qa.html"><span class="nav-en">Q&amp;A</span><span class="nav-ja">よくある質問</span></a></li>
+        <li class="nav-item"><a href="column.html"><span class="nav-en">Column</span><span class="nav-ja">コラム</span></a></li>
+      </ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div></div>
+  </header>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <nav class="mobile-nav" id="mobile-nav"><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button><div class="mobile-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><ul class="mobile-nav-list"><li><a href="index.html">Home</a></li><li><a href="business.html">Business Outline <span>業務内容</span></a></li><li><a href="cases.html">Case Example <span>解決事例</span></a></li><li><a href="price.html">Price List <span>費用一覧</span></a></li><li><a href="about.html">About Us <span>事務所紹介</span></a></li><li><a href="qa.html">Q&amp;A <span>よくある質問</span></a></li><li><a href="column.html">Column <span>コラム</span></a></li></ul>
+  <div class="mobile-nav-contact"><a href="tel:0368903248" class="mobile-tel"><i class="fas fa-phone-alt"></i>03-6890-3248</a><a href="contact.html" class="btn btn-cta"><i class="fas fa-envelope"></i>ご相談・お問合せ</a></div></nav>
+
+  <main>
+    <div class="page-hero page-hero--photo">
+      <div class="page-hero-bg" aria-hidden="true">
+        <img class="page-hero-bg-img" src="images/hero-bg.png" width="1920" height="640" alt="">
+      </div>
+      <div class="page-hero-photo-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>お問合せ</span></div>
+        <p class="page-hero-en">Contact</p>
+        <h1 class="page-hero-title">ご相談・お問合せ</h1>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Contact Us</p>
+          <h2 class="section-title">お問合せ</h2>
+          <p class="section-desc">初回相談は無料です。どんな小さなご質問でもお気軽にどうぞ。<br>1営業日以内にご返信いたします。</p>
+        </div>
+
+        <div class="section-split contact-page-intro">
+          <div class="section-split__media">
+            <div class="image-card">
+              <img class="section-image" src="images/service-intro.jpg" width="800" height="600" alt="ご相談・連絡のイメージ">
+            </div>
+          </div>
+          <div class="section-split__text">
+            <p class="section-split__lead">
+              お電話・メールフォーム・オンライン面談のいずれでもお受けしております。内容を拝見のうえ、担当者より順次ご連絡いたします。
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-layout">
+          <!-- Form -->
+          <div class="contact-form-wrap" data-aos="fade-up">
+            <h2><i class="fas fa-envelope" style="margin-right:10px;color:var(--color-accent);"></i>メールでのお問合せ</h2>
+            <div class="form-message form-error" id="form-error"></div>
+            <div class="form-message form-success" id="form-success">
+              <strong><i class="fas fa-check-circle"></i> 送信が完了しました。</strong><br>
+              1営業日以内に担当者よりご連絡いたします。しばらくお待ちください。
+            </div>
+            <form id="contact-form" novalidate
+              data-formspree="https://formspree.io/f/xwvndayk">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="name">お名前<span class="required">必須</span></label>
+                  <input type="text" id="name" name="name" class="form-input" placeholder="山田 太郎" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="company">会社名<span class="optional">任意</span></label>
+                  <input type="text" id="company" name="company" class="form-input" placeholder="株式会社○○">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="email">メールアドレス<span class="required">必須</span></label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="tel">電話番号<span class="optional">任意</span></label>
+                  <input type="tel" id="tel" name="tel" class="form-input" placeholder="03-XXXX-XXXX">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="category">お問合せ種別<span class="required">必須</span></label>
+                <select id="category" name="category" class="form-select" required>
+                  <option value="">— 選択してください —</option>
+                  <option value="顧問契約について">顧問契約について</option>
+                  <option value="リスクコンサルティング">リスクコンサルティング</option>
+                  <option value="IPO支援">IPO支援</option>
+                  <option value="人事労務アウトソーシング">人事労務アウトソーシング</option>
+                  <option value="派遣・職業紹介許可申請">派遣・職業紹介許可申請</option>
+                  <option value="助成金サポート">助成金サポート</option>
+                  <option value="費用について">費用について</option>
+                  <option value="その他">その他</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">お問合せ内容<span class="required">必須</span></label>
+                <textarea id="message" name="message" class="form-textarea" placeholder="ご質問・ご相談内容をご記入ください。" required></textarea>
+              </div>
+              <div class="form-group">
+                <label class="privacy-agree">
+                  <input type="checkbox" id="privacy-agree" required>
+                  <span><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意して送信します。</span>
+                </label>
+              </div>
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i>送信する
+              </button>
+            </form>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="contact-info-sidebar" data-aos="fade-up" data-aos-delay="150">
+            <div class="contact-info-card">
+              <div class="contact-info-card-title"><i class="fas fa-phone-alt"></i>電話でのお問合せ</div>
+              <div class="contact-tel-big"><i class="fas fa-phone-alt"></i><a href="tel:0368903248">03-6890-3248</a></div>
+              <div class="contact-hours">
+                受付時間：平日 9:00〜18:00<br>
+                定休日：土・日・祝・年末年始
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-card-title"><i class="fas fa-map-marker-alt"></i>事務所所在地</div>
+              <div class="contact-access-list">
+                <div class="contact-access-item"><i class="fas fa-building"></i><span>〒107-0051<br>東京都港区元赤坂1-2-7<br>赤坂Kタワー4F</span></div>
+                <div class="contact-access-item"><i class="fas fa-train"></i><span>東京メトロ銀座線・丸ノ内線<br>「赤坂見附駅」徒歩1分<br>東京メトロ半蔵門線・南北線・有楽町線<br>「永田町駅」徒歩3分</span></div>
+                <div class="contact-access-item"><i class="fas fa-video"></i><span>Zoom・Teamsでのオンライン<br>相談にも対応しています</span></div>
+              </div>
+            </div>
+            <div class="contact-info-card" style="background:var(--color-bg-light);">
+              <div class="contact-info-card-title"><i class="fas fa-clock"></i>ご返信について</div>
+              <p style="font-size:0.87rem;color:var(--color-text-light);line-height:1.5;">
+                フォームよりお問合せいただいた場合、<strong>1営業日以内</strong>にご連絡いたします。<br><br>
+                お急ぎの方はお電話でご連絡ください。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-cta-section" id="contact-cta-bottom">
+      <div class="contact-cta-bg" aria-hidden="true">
+        <img class="contact-cta-bg-img" src="images/cta-bg.jpg" width="1920" height="800" alt="">
+      </div>
+      <div class="contact-cta-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="contact-cta-inner">
+          <div class="contact-cta-text">
+            <p class="contact-cta-sub">お急ぎのご相談はお電話で</p>
+            <h2 class="contact-cta-title">03-6890-3248</h2>
+            <p class="contact-cta-desc">
+              平日 9:00〜18:00（土日祝・年末年始を除く）<br>
+              フォーム送信後の確認などもお電話で承ります。
+            </p>
+          </div>
+          <div class="contact-cta-buttons">
+            <a href="tel:0368903248" class="btn btn-tel">
+              <i class="fas fa-phone-alt"></i>
+              <span>
+                <small>電話で問い合わせる</small>
+                03-6890-3248
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container footer-main-inner"><div class="footer-brand"><div class="footer-logo"><img src="images/logo-transparent.png" alt="STRATOZ 社会保険労務士法人ストラテジー" class="logo-img"><span class="logo-ja">社会保険労務士法人ストラテジー</span></div><address class="footer-address">〒107-0051 東京都港区元赤坂1-2-7 赤坂Kタワー4F<br>TEL：<a href="tel:0368903248">03-6890-3248</a><br>受付時間：9:00〜18:00（土日祝・年末年始除く）</address></div><nav class="footer-nav"><div class="footer-nav-col"><h3 class="footer-nav-heading">サービス</h3><ul><li><a href="business.html#risk">リスクコンサルティング</a></li><li><a href="business.html#ipo">IPO支援</a></li><li><a href="business.html#outsourcing">人事労務アウトソーシング</a></li><li><a href="business.html#dispatch">派遣・職業紹介許可申請</a></li><li><a href="business.html#subsidy">助成金サポート</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">事務所</h3><ul><li><a href="about.html">事務所紹介</a></li><li><a href="cases.html">解決事例</a></li><li><a href="price.html">費用一覧</a></li><li><a href="qa.html">よくある質問</a></li><li><a href="column.html">コラム</a></li></ul></div><div class="footer-nav-col"><h3 class="footer-nav-heading">お問合せ</h3><ul><li><a href="contact.html">お問合せフォーム</a></li><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></nav></div></div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="copyright">&copy; 2025 社会保険労務士法人ストラテジー All Rights Reserved.</p><ul class="footer-links"><li><a href="privacy.html">プライバシーポリシー</a></li></ul></div></div>
+  </footer>
+  <button class="back-to-top" id="back-to-top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>コラム投稿（管理）｜社会保険労務士法人ストラテジー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .admin-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+    .admin-heading { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-serif); margin-bottom: 32px; }
+    .key-box {
+      background: var(--color-bg-light); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); padding: 32px; margin-bottom: 24px;
+    }
+    .key-box label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--color-primary); margin-bottom: 10px; }
+    .key-box input {
+      width: 100%; max-width: 320px; padding: 12px 16px;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: 1rem;
+    }
+    .key-box .key-msg { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 12px; }
+    .key-box .key-msg.error { color: #c0392b; }
+    .key-box .key-msg.ok { color: #27ae60; }
+    .form-panel { display: none; }
+    .form-panel.visible { display: block; }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 0.88rem; font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="url"] {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: 1rem;
+    }
+    .form-group input[readonly] { background: var(--color-bg-light); color: var(--color-text-light); cursor: default; }
+    .form-group textarea {
+      width: 100%; min-height: 280px; padding: 14px 16px;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.6;
+      resize: vertical;
+    }
+    .form-group .hint { font-size: 0.78rem; color: var(--color-text-muted); margin-top: 6px; }
+    .admin-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .admin-actions .btn { padding: 12px 24px; font-size: 0.95rem; }
+    .submit-msg { margin-top: 16px; font-size: 0.9rem; }
+    .submit-msg.success { color: #27ae60; }
+    .submit-msg.error { color: #c0392b; }
+    .export-row { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+    .export-row p { font-size: 0.88rem; color: var(--color-text-light); margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <h1 class="admin-heading">コラム投稿（管理）</h1>
+
+    <!-- 投稿キー入力 -->
+    <div id="key-panel" class="key-box">
+      <label for="post-key">投稿キー</label>
+      <input type="password" id="post-key" placeholder="キーを入力" autocomplete="off">
+      <button type="button" id="key-submit" class="btn btn-primary" style="margin-top:12px;">
+        <i class="fas fa-lock-open"></i> 送信
+      </button>
+      <p id="key-msg" class="key-msg" aria-live="polite"></p>
+    </div>
+
+    <!-- 投稿フォーム（キー認証後に表示） -->
+    <div id="form-panel" class="form-panel">
+      <form id="post-form" class="key-box">
+        <div class="form-group">
+          <label for="post-title">タイトル <span style="color:#c0392b;">*</span></label>
+          <input type="text" id="post-title" required placeholder="記事のタイトル">
+        </div>
+        <div class="form-group">
+          <label for="post-slug">Slug（URL）</label>
+          <input type="text" id="post-slug" readonly placeholder="タイトル入力で自動生成">
+          <p class="hint">タイトルから自動生成されます。日本語の場合は post-日付 形式（例: post-20260310）。</p>
+        </div>
+        <div class="form-group">
+          <label for="post-date">投稿日 <span style="color:#c0392b;">*</span></label>
+          <input type="date" id="post-date" required>
+          <p class="hint">表示される日付です。</p>
+        </div>
+        <div class="form-group">
+          <label for="post-thumbnail">サムネイル画像</label>
+          <input type="text" id="post-thumbnail" placeholder="images/column/xxx.jpg または https://...">
+          <p class="hint">相対パス（例: images/column/sample.jpg）または画像URLを入力。</p>
+        </div>
+        <div class="form-group">
+          <label for="post-body">本文 <span style="color:#c0392b;">*</span></label>
+          <textarea id="post-body" required placeholder="HTMLタグを使用できます。例: &lt;p&gt;段落&lt;/p&gt;"></textarea>
+          <p class="hint">HTMLで記述できます（&lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;strong&gt; など）。</p>
+        </div>
+        <div class="admin-actions">
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 投稿を保存</button>
+        </div>
+        <p id="submit-msg" class="submit-msg" aria-live="polite"></p>
+      </form>
+
+      <div class="export-row">
+        <p>保存した記事はブラウザのローカルストレージに保存されています。バックアップや他環境で使う場合は JSON をエクスポートし、<code>data/column-posts.json</code> として配置できます。</p>
+        <button type="button" id="export-json" class="btn btn-outline"><i class="fas fa-download"></i> JSON をエクスポート</button>
+        <button type="button" id="clear-local-posts" class="btn btn-outline" style="margin-left:8px;border-color:#c0392b;color:#c0392b;"><i class="fas fa-trash-alt"></i> ブラウザ内の記事データをすべて削除</button>
+        <p class="hint" style="margin-top:12px;">「削除」はこのブラウザに保存された <code>columnPosts</code> のみ消去します。<code>data/column-posts.json</code> はファイルを直接編集してください。</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* 投稿キー（必要に応じて変更してください） */
+  const POST_KEY = 'stratoz-column-8xk29';
+
+  const keyPanel   = document.getElementById('key-panel');
+  const formPanel  = document.getElementById('form-panel');
+  const keyInput   = document.getElementById('post-key');
+  const keySubmit  = document.getElementById('key-submit');
+  const keyMsg     = document.getElementById('key-msg');
+  const postForm   = document.getElementById('post-form');
+  const submitMsg  = document.getElementById('submit-msg');
+  const exportBtn  = document.getElementById('export-json');
+  const clearBtn     = document.getElementById('clear-local-posts');
+
+  const STORAGE_KEY = 'columnPosts';
+
+  function getPosts() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setPosts(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  /* タイトルに日本語（ひらがな・カタカナ・漢字）が含まれるか */
+  function hasJapanese(str) {
+    return /[\u3040-\u309f\u30a0-\u30ff\u4e00-\u9faf]/.test(String(str));
+  }
+
+  /* タイトルと投稿日から slug を生成（日本語なら post-YYYYMMDD、それ以外はタイトル由来） */
+  function generateSlug(title, dateStr) {
+    var titleTrim = String(title).trim();
+    if (!titleTrim) return '';
+    if (hasJapanese(titleTrim)) {
+      var d = dateStr || document.getElementById('post-date').value || '';
+      var yyyymmdd = d.replace(/-/g, '');
+      return yyyymmdd ? 'post-' + yyyymmdd : 'post-' + new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    }
+    return slugFromTitle(titleTrim);
+  }
+
+  function slugFromTitle(title) {
+    return String(title)
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]/g, '')
+      .replace(/-+/g, '-')
+      .toLowerCase() || '';
+  }
+
+  function updateSlugDisplay() {
+    var title = document.getElementById('post-title').value;
+    var dateEl = document.getElementById('post-date').value;
+    var slug = generateSlug(title, dateEl);
+    document.getElementById('post-slug').value = slug;
+  }
+
+  /* キー認証 */
+  function checkKey() {
+    const key = keyInput.value.trim();
+    keyMsg.textContent = '';
+    keyMsg.classList.remove('error', 'ok');
+    if (!key) {
+      keyMsg.textContent = 'キーを入力してください。';
+      keyMsg.classList.add('error');
+      return;
+    }
+    if (key !== POST_KEY) {
+      keyMsg.textContent = 'キーが正しくありません。';
+      keyMsg.classList.add('error');
+      return;
+    }
+    keyMsg.textContent = '認証しました。';
+    keyMsg.classList.add('ok');
+    keyPanel.style.display = 'none';
+    formPanel.classList.add('visible');
+    /* 投稿日に今日の日付をデフォルトで */
+    var today = new Date();
+    document.getElementById('post-date').value = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    updateSlugDisplay();
+  }
+
+  /* タイトル・投稿日変更時に slug を自動更新 */
+  document.getElementById('post-title').addEventListener('input', updateSlugDisplay);
+  document.getElementById('post-title').addEventListener('change', updateSlugDisplay);
+  document.getElementById('post-date').addEventListener('change', updateSlugDisplay);
+  document.getElementById('post-date').addEventListener('input', updateSlugDisplay);
+
+  keySubmit.addEventListener('click', checkKey);
+  keyInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); checkKey(); }
+  });
+
+  /* フォーム送信 */
+  postForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitMsg.textContent = '';
+    submitMsg.classList.remove('success', 'error');
+
+    const title = document.getElementById('post-title').value.trim();
+    const date  = document.getElementById('post-date').value.trim();
+    const thumb = document.getElementById('post-thumbnail').value.trim();
+    const body  = document.getElementById('post-body').value.trim();
+
+    if (!title || !date) {
+      submitMsg.textContent = 'タイトルと投稿日は必須です。';
+      submitMsg.classList.add('error');
+      return;
+    }
+
+    const id   = Date.now();
+    const slugEl = document.getElementById('post-slug').value.trim();
+    const slug = slugEl || generateSlug(title, date) || 'post-' + id;
+    const excerpt = body.replace(/<[^>]+>/g, '').slice(0, 120) + (body.length > 120 ? '…' : '');
+
+    const post = {
+      id: id,
+      slug: slug,
+      title: title,
+      date: date,
+      thumbnail: thumb || '',
+      body: body,
+      excerpt: excerpt,
+      status: 'published',
+      category: 'notice',
+      category_label: 'お知らせ'
+    };
+
+    const list = getPosts();
+    list.unshift(post);
+    setPosts(list);
+
+    submitMsg.textContent = '保存しました。コラム一覧（column/index.html）で確認できます。';
+    submitMsg.classList.add('success');
+    postForm.reset();
+    document.getElementById('post-date').value = new Date().toISOString().slice(0, 10);
+  });
+
+  /* エクスポート */
+  exportBtn.addEventListener('click', function () {
+    const list = getPosts();
+    const json = JSON.stringify(list, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'column-posts.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    if (!confirm('このブラウザに保存したコラム記事をすべて削除しますか？')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    alert('削除しました。');
+  });
+  </script>
+</body>
+</html>

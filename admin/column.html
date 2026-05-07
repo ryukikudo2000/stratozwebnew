@@ -121,6 +121,49 @@
     .eyecatch-preview-wrap { margin-top: 12px; padding: 12px; background: var(--bg); border-radius: var(--radius); border: 1px solid var(--border); }
     .eyecatch-preview-img { max-width: 100%; max-height: 200px; display: block; border-radius: 4px; }
     .form-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
+    .ai-box {
+      background: #f8fbff;
+      border: 1px solid #d8e6f8;
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .ai-box-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .ai-box-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ai-box-title i { color: var(--accent); }
+    .ai-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .btn-ai-generate {
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      background: #2550a0;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+    .btn-ai-generate:hover { background: #1d4386; }
+    .btn-ai-generate:disabled { opacity: 0.7; cursor: not-allowed; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-check { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
     .form-check input { width: 16px; height: 16px; accent-color: var(--primary); }
@@ -194,6 +237,7 @@
     @media (max-width: 768px) {
       .admin-main { padding: 16px; }
       .form-row { grid-template-columns: 1fr; }
+      .ai-inline { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -271,6 +315,45 @@
           <!-- Title -->
           <div class="form-card">
             <div class="form-card-title"><i class="fas fa-heading"></i> 基本情報</div>
+            <div class="ai-box">
+              <div class="ai-box-head">
+                <div class="ai-box-title"><i class="fas fa-wand-magic-sparkles"></i> テーマからAI下書き生成</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">テーマ <span class="req">*</span></label>
+                <input type="text" id="ai-topic" class="form-input" placeholder="例: 2026年の育児・介護休業法改正の実務対応ポイント">
+              </div>
+              <div class="ai-inline">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">文体</label>
+                  <select id="ai-tone" class="form-select">
+                    <option value="professional">専門的（推奨）</option>
+                    <option value="friendly">やさしい説明</option>
+                    <option value="notice">お知らせ調</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">分量</label>
+                  <select id="ai-length" class="form-select">
+                    <option value="short">短め</option>
+                    <option value="medium" selected>標準</option>
+                    <option value="long">長め</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">追加キーワード（任意）</label>
+                <input type="text" id="ai-keywords" class="form-input" placeholder="例: 就業規則, 36協定, 労基署対応">
+              </div>
+              <div class="form-group">
+                <label class="form-label">OpenAI APIキー（任意保存）</label>
+                <input type="password" id="ai-api-key" class="form-input" placeholder="sk-...">
+                <p class="form-hint">この管理画面のブラウザにのみ保存されます。未入力なら生成できません。</p>
+              </div>
+              <button type="button" id="btn-ai-generate" class="btn-ai-generate">
+                <i class="fas fa-robot"></i> テーマから下書きを生成してフォームに反映
+              </button>
+            </div>
             <div class="form-group">
               <label class="form-label">タイトル <span class="req">*</span></label>
               <input type="text" id="f-title" class="form-input" placeholder="記事タイトルを入力してください">
@@ -626,6 +709,157 @@
   $('f-title').addEventListener('input', updateSlugFromTitle);
   $('f-title').addEventListener('change', updateSlugFromTitle);
 
+  /* ---- AI draft generation ---- */
+  const AI_KEY_STORAGE = 'stratoz_admin_openai_key';
+  const aiApiKeyInput = $('ai-api-key');
+  const savedApiKey = localStorage.getItem(AI_KEY_STORAGE) || '';
+  if (savedApiKey) aiApiKeyInput.value = savedApiKey;
+
+  aiApiKeyInput.addEventListener('change', function () {
+    const v = this.value.trim();
+    if (v) localStorage.setItem(AI_KEY_STORAGE, v);
+  });
+
+  function safeJsonParse(text) {
+    if (!text) return null;
+    try { return JSON.parse(text); } catch (_) {}
+    const fenced = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+    if (fenced && fenced[1]) {
+      try { return JSON.parse(fenced[1]); } catch (_) {}
+    }
+    const first = text.indexOf('{');
+    const last = text.lastIndexOf('}');
+    if (first >= 0 && last > first) {
+      try { return JSON.parse(text.slice(first, last + 1)); } catch (_) {}
+    }
+    return null;
+  }
+
+  function normalizeCategory(input) {
+    const v = (input || '').toLowerCase().trim();
+    if (!v) return 'notice';
+    if (catLabel[v]) return v;
+    if (v.includes('法') || v.includes('労基') || v.includes('改正')) return 'law';
+    if (v.includes('リスク') || v.includes('ハラス') || v.includes('紛争')) return 'risk';
+    if (v.includes('ipo') || v.includes('上場')) return 'ipo';
+    if (v.includes('アウトソーシング') || v.includes('給与') || v.includes('手続')) return 'outsourcing';
+    if (v.includes('助成金') || v.includes('補助金')) return 'subsidy';
+    if (v.includes('人事') || v.includes('評価') || v.includes('制度')) return 'hr';
+    if (v.includes('お知らせ') || v.includes('notice')) return 'notice';
+    return 'notice';
+  }
+
+  function convertBodyFromAi(body) {
+    if (!body) return '';
+    if (Array.isArray(body)) return body.join('\n');
+    return String(body).trim();
+  }
+
+  async function generateDraftWithAi() {
+    const topic = $('ai-topic').value.trim();
+    const tone = $('ai-tone').value;
+    const length = $('ai-length').value;
+    const keywords = $('ai-keywords').value.trim();
+    const apiKey = $('ai-api-key').value.trim();
+    const btn = $('btn-ai-generate');
+
+    if (!topic) {
+      toast('AI生成するテーマを入力してください', 'error');
+      $('ai-topic').focus();
+      return;
+    }
+    if (!apiKey) {
+      toast('OpenAI APIキーを入力してください', 'error');
+      $('ai-api-key').focus();
+      return;
+    }
+
+    localStorage.setItem(AI_KEY_STORAGE, apiKey);
+
+    const lengthGuide = {
+      short: '本文は400〜700字程度',
+      medium: '本文は800〜1200字程度',
+      long: '本文は1400〜2000字程度'
+    }[length] || '本文は800〜1200字程度';
+
+    const toneGuide = {
+      professional: '社労士の専門家として、実務で使える具体策を重視',
+      friendly: '専門用語をかみ砕き、経営者にもわかりやすく',
+      notice: 'お知らせとして簡潔で事実中心'
+    }[tone] || '社労士の専門家として、実務で使える具体策を重視';
+
+    const systemPrompt = 'あなたは日本の社会保険労務士法人の編集アシスタントです。必ず日本語で、実務に使える正確で丁寧な内容を作成してください。出力はJSONのみ。';
+    const userPrompt = [
+      '以下のテーマで、コラム管理画面に入れる下書きを作成してください。',
+      `テーマ: ${topic}`,
+      keywords ? `追加キーワード: ${keywords}` : '追加キーワード: なし',
+      `文体: ${toneGuide}`,
+      `分量: ${lengthGuide}`,
+      '出力JSONスキーマ:',
+      '{',
+      '  "title": "35文字前後のタイトル",',
+      '  "excerpt": "120文字前後の要約",',
+      '  "category": "law|risk|ipo|outsourcing|subsidy|hr|notice のいずれか",',
+      '  "tags": "カンマ区切りのタグ文字列",',
+      '  "body": "本文（プレーンテキスト。改行を入れて読みやすく）"',
+      '}',
+      '注意: JSON以外の文は一切不要。'
+    ].join('\n');
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 生成中...';
+    spinner(true);
+    try {
+      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + apiKey
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          temperature: 0.7,
+          response_format: { type: 'json_object' },
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt }
+          ]
+        })
+      });
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(`AI API error ${res.status}: ${txt.slice(0, 160)}`);
+      }
+      const data = await res.json();
+      const content = data?.choices?.[0]?.message?.content || '';
+      const parsed = safeJsonParse(content);
+      if (!parsed) throw new Error('AIレスポンスの解析に失敗しました');
+
+      const generatedTitle = (parsed.title || topic).toString().trim();
+      $('f-title').value = generatedTitle;
+      if (!editingId) $('f-slug').value = generateSlug();
+      $('f-excerpt').value = (parsed.excerpt || '').toString().trim();
+      $('body-html').value = convertBodyFromAi(parsed.body);
+
+      const category = normalizeCategory(parsed.category);
+      $('f-category').value = category;
+      $('f-tags').value = (parsed.tags || '').toString().trim();
+
+      if (!$('f-meta-title').value.trim()) $('f-meta-title').value = generatedTitle;
+      if (!$('f-meta-desc').value.trim()) $('f-meta-desc').value = $('f-excerpt').value.trim();
+      if (!$('f-published-date').value) $('f-published-date').value = new Date().toISOString().slice(0, 10);
+
+      switchEditorTab('write');
+      toast('AIで下書きを生成しました。内容を確認して保存してください。', 'success');
+    } catch (e) {
+      toast('AI生成に失敗しました: ' + e.message, 'error');
+    } finally {
+      spinner(false);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-robot"></i> テーマから下書きを生成してフォームに反映';
+    }
+  }
+
   /* ---- アイキャッチ: ファイル選択 → base64 変換・プレビュー ---- */
   const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
   $('f-eyecatch-file').addEventListener('change', function () {
@@ -784,6 +1018,7 @@
   $('btn-save-publish').addEventListener('click',  () => saveArticle('published'));
   $('btn-save-draft').addEventListener('click',    () => saveArticle('draft'));
   $('btn-cancel').addEventListener('click',        () => showPanel('panel-list'));
+  $('btn-ai-generate').addEventListener('click',   generateDraftWithAi);
   $('modal-cancel').addEventListener('click', () => $('confirm-modal').classList.remove('open'));
   $('modal-ok').addEventListener('click', doDelete);
 

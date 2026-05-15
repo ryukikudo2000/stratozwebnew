@@ -59,6 +59,52 @@
     .contact-access-item i { color: var(--color-accent); margin-top: 3px; font-size: 0.9rem; }
     @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { .contact-form-wrap { padding: 28px 20px; } .form-row { grid-template-columns: 1fr; } }
+    .contact-page-lead {
+      max-width: 42rem;
+      margin: 0 auto 40px;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--color-text-light);
+      line-height: 1.85;
+    }
+    @media (max-width: 768px) {
+      .contact-page-lead { margin-bottom: 28px; font-size: 0.95rem; }
+    }
+    .contact-confirm-title {
+      font-size: 1.15rem; font-weight: 700; color: var(--color-primary); margin: 0 0 10px;
+      font-family: var(--font-serif);
+    }
+    .contact-confirm-intro {
+      font-size: 0.9rem; color: var(--color-text-light); margin: 0 0 22px; line-height: 1.65;
+    }
+    .contact-confirm-rows {
+      margin-bottom: 28px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden;
+    }
+    .contact-confirm-row {
+      display: grid; grid-template-columns: 130px 1fr; gap: 0; border-bottom: 1px solid var(--color-border);
+    }
+    .contact-confirm-row:last-child { border-bottom: none; }
+    .contact-confirm-label {
+      padding: 12px 14px; background: var(--color-bg-light); font-size: 0.82rem; font-weight: 700;
+      color: var(--color-text-muted); align-self: stretch;
+    }
+    .contact-confirm-value {
+      padding: 12px 14px; font-size: 0.92rem; color: var(--color-text); line-height: 1.55; word-break: break-word;
+    }
+    .contact-confirm-row--message { grid-template-columns: 1fr; }
+    .contact-confirm-row--message .contact-confirm-label { border-bottom: 1px solid var(--color-border); }
+    .contact-confirm-row--message .contact-confirm-value { white-space: pre-wrap; }
+    .contact-confirm-actions {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    }
+    .contact-confirm-actions .btn-submit { flex: 1; min-width: 200px; margin-top: 0; }
+    @media (max-width: 480px) {
+      .contact-confirm-row { grid-template-columns: 1fr; }
+      .contact-confirm-label { padding-bottom: 6px; }
+      .contact-confirm-actions { flex-direction: column; }
+      .contact-confirm-actions .btn { width: 100%; justify-content: center; }
+      .contact-confirm-actions .btn-submit { min-width: 0; }
+    }
   </style>
 </head>
 <body>
@@ -103,18 +149,9 @@
           <p class="section-desc">初回相談は無料です。どんな小さなご質問でもお気軽にどうぞ。<br>1営業日以内にご返信いたします。</p>
         </div>
 
-        <div class="section-split contact-page-intro">
-          <div class="section-split__media">
-            <div class="image-card">
-              <img class="section-image" src="images/service-intro.jpg" width="800" height="600" alt="ご相談・連絡のイメージ">
-            </div>
-          </div>
-          <div class="section-split__text">
-            <p class="section-split__lead">
-              お電話・メールフォーム・オンライン面談のいずれでもお受けしております。内容を拝見のうえ、担当者より順次ご連絡いたします。
-            </p>
-          </div>
-        </div>
+        <p class="contact-page-lead">
+          お電話・メールフォーム・オンライン面談のいずれでもお受けしております。内容を拝見のうえ、担当者より順次ご連絡いたします。
+        </p>
 
         <div class="contact-layout">
           <!-- Form -->
@@ -127,53 +164,92 @@
             </div>
             <form id="contact-form" novalidate
               data-formspree="https://formspree.io/f/xwvndayk">
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="name">お名前<span class="required">必須</span></label>
-                  <input type="text" id="name" name="name" class="form-input" placeholder="山田 太郎" required>
+              <div id="contact-form-input-step">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="name">お名前<span class="required">必須</span></label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="山田 太郎" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="company">会社名<span class="optional">任意</span></label>
+                    <input type="text" id="company" name="company" class="form-input" placeholder="株式会社○○">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="email">メールアドレス<span class="required">必須</span></label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="tel">電話番号<span class="required">必須</span></label>
+                    <input type="tel" id="tel" name="tel" class="form-input" placeholder="03-XXXX-XXXX" required>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="company">会社名<span class="optional">任意</span></label>
-                  <input type="text" id="company" name="company" class="form-input" placeholder="株式会社○○">
+                  <label class="form-label" for="category">お問合せ種別<span class="required">必須</span></label>
+                  <select id="category" name="category" class="form-select" required>
+                    <option value="">— 選択してください —</option>
+                    <option value="顧問契約について">顧問契約について</option>
+                    <option value="リスクコンサルティング">リスクコンサルティング</option>
+                    <option value="IPO支援">IPO支援</option>
+                    <option value="人事労務アウトソーシング">人事労務アウトソーシング</option>
+                    <option value="派遣・職業紹介許可申請">派遣・職業紹介許可申請</option>
+                    <option value="助成金サポート">助成金サポート</option>
+                    <option value="費用について">費用について</option>
+                    <option value="その他">その他</option>
+                  </select>
                 </div>
-              </div>
-              <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label" for="email">メールアドレス<span class="required">必須</span></label>
-                  <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" required>
+                  <label class="form-label" for="message">お問合せ内容<span class="required">必須</span></label>
+                  <textarea id="message" name="message" class="form-textarea" placeholder="ご質問・ご相談内容をご記入ください。" required></textarea>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="tel">電話番号<span class="required">必須</span></label>
-                  <input type="tel" id="tel" name="tel" class="form-input" placeholder="03-XXXX-XXXX" required>
+                  <label class="privacy-agree">
+                    <input type="checkbox" id="privacy-agree" required>
+                    <span><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意して送信します。</span>
+                  </label>
+                </div>
+                <button type="button" class="btn-submit" id="contact-btn-to-confirm">
+                  <i class="fas fa-check-double"></i>入力内容を確認する
+                </button>
+              </div>
+
+              <div id="contact-form-confirm-step" hidden>
+                <h3 class="contact-confirm-title">入力内容の確認</h3>
+                <p class="contact-confirm-intro">以下の内容でお問い合わせを送信します。内容をご確認のうえ、「この内容で送信する」を押してください。</p>
+                <div class="contact-confirm-rows" role="region" aria-label="確認内容">
+                  <div class="contact-confirm-row">
+                    <span class="contact-confirm-label">お名前</span>
+                    <span class="contact-confirm-value" id="confirm-name"></span>
+                  </div>
+                  <div class="contact-confirm-row">
+                    <span class="contact-confirm-label">会社名</span>
+                    <span class="contact-confirm-value" id="confirm-company"></span>
+                  </div>
+                  <div class="contact-confirm-row">
+                    <span class="contact-confirm-label">メール</span>
+                    <span class="contact-confirm-value" id="confirm-email"></span>
+                  </div>
+                  <div class="contact-confirm-row">
+                    <span class="contact-confirm-label">電話番号</span>
+                    <span class="contact-confirm-value" id="confirm-tel"></span>
+                  </div>
+                  <div class="contact-confirm-row">
+                    <span class="contact-confirm-label">お問合せ種別</span>
+                    <span class="contact-confirm-value" id="confirm-category"></span>
+                  </div>
+                  <div class="contact-confirm-row contact-confirm-row--message">
+                    <span class="contact-confirm-label">お問合せ内容</span>
+                    <span class="contact-confirm-value" id="confirm-message"></span>
+                  </div>
+                </div>
+                <div class="contact-confirm-actions">
+                  <button type="button" class="btn btn-outline" id="contact-btn-back-to-input">修正する</button>
+                  <button type="button" class="btn-submit" id="contact-btn-send">
+                    <i class="fas fa-paper-plane"></i>この内容で送信する
+                  </button>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label" for="category">お問合せ種別<span class="required">必須</span></label>
-                <select id="category" name="category" class="form-select" required>
-                  <option value="">— 選択してください —</option>
-                  <option value="顧問契約について">顧問契約について</option>
-                  <option value="リスクコンサルティング">リスクコンサルティング</option>
-                  <option value="IPO支援">IPO支援</option>
-                  <option value="人事労務アウトソーシング">人事労務アウトソーシング</option>
-                  <option value="派遣・職業紹介許可申請">派遣・職業紹介許可申請</option>
-                  <option value="助成金サポート">助成金サポート</option>
-                  <option value="費用について">費用について</option>
-                  <option value="その他">その他</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="message">お問合せ内容<span class="required">必須</span></label>
-                <textarea id="message" name="message" class="form-textarea" placeholder="ご質問・ご相談内容をご記入ください。" required></textarea>
-              </div>
-              <div class="form-group">
-                <label class="privacy-agree">
-                  <input type="checkbox" id="privacy-agree" required>
-                  <span><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意して送信します。</span>
-                </label>
-              </div>
-              <button type="submit" class="btn-submit">
-                <i class="fas fa-paper-plane"></i>送信する
-              </button>
             </form>
           </div>
 
@@ -208,9 +284,6 @@
     </section>
 
     <section class="contact-cta-section" id="contact-cta-bottom">
-      <div class="contact-cta-bg" aria-hidden="true">
-        <img class="contact-cta-bg-img" src="images/cta-bg.jpg" width="1920" height="800" alt="">
-      </div>
       <div class="contact-cta-overlay" aria-hidden="true"></div>
       <div class="container">
         <div class="contact-cta-inner">

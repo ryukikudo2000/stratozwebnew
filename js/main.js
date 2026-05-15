@@ -193,18 +193,24 @@
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
+    const inputStep   = document.getElementById('contact-form-input-step');
+    const confirmStep = document.getElementById('contact-form-confirm-step');
+    const btnToConfirm = document.getElementById('contact-btn-to-confirm');
+    const btnBack      = document.getElementById('contact-btn-back-to-input');
+    const btnSend      = document.getElementById('contact-btn-send');
 
-      const submitBtn = form.querySelector('.btn-submit');
-      const errorEl   = document.getElementById('form-error');
-      const successEl = document.getElementById('form-success');
+    if (!inputStep || !confirmStep || !btnToConfirm || !btnBack || !btnSend) return;
 
-      // Clear messages
+    const errorEl   = document.getElementById('form-error');
+    const successEl = document.getElementById('form-success');
+
+    function clearMessages() {
       if (errorEl)   errorEl.style.display   = 'none';
       if (successEl) successEl.style.display = 'none';
+    }
 
-      // ---- バリデーション ----
+    /** @returns {{ valid: boolean, errorText?: string }} */
+    function validateContactFields() {
       const required = form.querySelectorAll('[required]');
       let valid = true;
       required.forEach(function (field) {
@@ -216,35 +222,92 @@
           else                     { field.classList.remove('error'); }
         }
       });
-
       if (!valid) {
-        if (errorEl) {
-          errorEl.textContent = '必須項目をすべて入力・確認してください。';
-          errorEl.style.display = 'block';
-        }
-        return;
+        return { valid: false, errorText: '必須項目をすべて入力・確認してください。' };
       }
-
-      // メール形式チェック
       const emailField = form.querySelector('[type="email"]');
       if (emailField && emailField.value) {
         const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailReg.test(emailField.value)) {
           emailField.classList.add('error');
-          if (errorEl) {
-            errorEl.textContent = 'メールアドレスの形式が正しくありません。';
-            errorEl.style.display = 'block';
-          }
-          return;
+          return { valid: false, errorText: 'メールアドレスの形式が正しくありません。' };
         }
       }
+      return { valid: true };
+    }
 
-      if (submitBtn) {
-        submitBtn.disabled    = true;
-        submitBtn.innerHTML   = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
+    function showError(text) {
+      if (errorEl) {
+        errorEl.textContent = text;
+        errorEl.style.display = 'block';
+      }
+    }
+
+    function isConfirmVisible() {
+      return confirmStep && !confirmStep.hasAttribute('hidden');
+    }
+
+    function showInputStep() {
+      if (inputStep) {
+        inputStep.removeAttribute('hidden');
+        inputStep.removeAttribute('aria-hidden');
+      }
+      if (confirmStep) {
+        confirmStep.setAttribute('hidden', '');
+        confirmStep.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function showConfirmStep() {
+      const companyRaw = form.querySelector('[name="company"]')?.value.trim() || '';
+      const nameVal    = form.querySelector('[name="name"]')?.value.trim() || '';
+      const emailVal   = form.querySelector('[name="email"]')?.value.trim() || '';
+      const telVal     = form.querySelector('[name="tel"]')?.value.trim() || '';
+      const categoryVal = form.querySelector('[name="category"]')?.value || '';
+      const messageVal = form.querySelector('[name="message"]')?.value || '';
+
+      const elName     = document.getElementById('confirm-name');
+      const elCompany  = document.getElementById('confirm-company');
+      const elEmail    = document.getElementById('confirm-email');
+      const elTel      = document.getElementById('confirm-tel');
+      const elCategory = document.getElementById('confirm-category');
+      const elMessage  = document.getElementById('confirm-message');
+      if (elName)     elName.textContent     = nameVal;
+      if (elCompany)  elCompany.textContent  = companyRaw || '（未記入）';
+      if (elEmail)    elEmail.textContent    = emailVal;
+      if (elTel)      elTel.textContent      = telVal;
+      if (elCategory) elCategory.textContent = categoryVal;
+      if (elMessage)  elMessage.textContent  = messageVal;
+
+      clearMessages();
+      if (inputStep) {
+        inputStep.setAttribute('hidden', '');
+        inputStep.setAttribute('aria-hidden', 'true');
+      }
+      if (confirmStep) {
+        confirmStep.removeAttribute('hidden');
+        confirmStep.removeAttribute('aria-hidden');
+      }
+      if (btnSend) btnSend.focus();
+      const wrap = form.closest('.contact-form-wrap');
+      if (wrap) {
+        wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function resetSendButton() {
+      if (btnSend) {
+        btnSend.disabled  = false;
+        btnSend.innerHTML = '<i class="fas fa-paper-plane"></i>この内容で送信する';
+      }
+    }
+
+    async function submitContactToServer() {
+      if (btnSend) {
+        btnSend.disabled  = true;
+        btnSend.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
       }
 
-      // ---- 送信日時 ----
       const now = new Date();
       const sentAt = now.toLocaleDateString('ja-JP', {
         year: 'numeric', month: '2-digit', day: '2-digit',
@@ -252,15 +315,13 @@
         hour12: false
       });
 
-      // ---- フォームデータ収集 ----
-      const company  = form.querySelector('[name="company"]')?.value  || '（未記入）';
-      const name     = form.querySelector('[name="name"]')?.value     || '';
-      const email    = form.querySelector('[name="email"]')?.value    || '';
-      const tel      = form.querySelector('[name="tel"]')?.value      || '（未記入）';
+      const company  = form.querySelector('[name="company"]')?.value.trim() || '（未記入）';
+      const name     = form.querySelector('[name="name"]')?.value.trim() || '';
+      const email    = form.querySelector('[name="email"]')?.value.trim() || '';
+      const tel      = form.querySelector('[name="tel"]')?.value.trim() || '（未記入）';
       const category = form.querySelector('[name="category"]')?.value || '';
-      const message  = form.querySelector('[name="message"]')?.value  || '';
+      const message  = form.querySelector('[name="message"]')?.value || '';
 
-      // ---- メール本文 ----
       const mailBody = [
         '【Stratoz】お問い合わせがありました',
         '─'.repeat(40),
@@ -276,7 +337,6 @@
         '─'.repeat(40),
       ].join('\n');
 
-      // ---- 自動返信メール本文 ----
       const autoReplyBody = [
         name + ' 様',
         '',
@@ -306,35 +366,15 @@
         '─────────────────────────',
       ].join('\n');
 
-      // ---- Formspree 送信 ----
-      // フォームの data-formspree 属性からエンドポイントを取得
-      // エンドポイント: https://formspree.io/f/xwvndayk
-      //
-      // Formspree ダッシュボードで以下を設定してください：
-      //    [必須] Settings > Email Notifications の "To:" に以下3名を追加：
-      //      takeuchi@stratoz.jp
-      //      kudo@stratoz.jp
-      //      umemura@stratoz.jp
-      //    [必須] Settings > Email Notifications の "Subject:" を：
-      //      【Stratoz】お問い合わせがありました
-      //    [必須・問い合わせ者への自動返信] Plugins または Settings の Auto-Response / Auto-Responder を有効化し、
-      //      送信者メールのフィールド名に「email」（JSON で送っている英字フィールド）を指定する。
-      //      件名例: お問い合わせありがとうございます｜Stratoz
-      //      本文は _autoresponse の内容が使われる（プランにより要確認）
       const FORMSPREE_ENDPOINT = form.dataset.formspree || '';
 
       const payload = {
-        // Formspree予約フィールド（_で始まるフィールドはFormspreeが特別処理）
         _subject:      '【Stratoz】お問い合わせがありました',
         _replyto:      email,
-        // 問い合わせ側への自動返信本文（ダッシュボードで Auto-Response を有効化し、宛先フィールドに email を指定）
         _autoresponse: autoReplyBody,
-        // 送信者向けメールの宛先・氏名（Formspree は英字の email / name を自動返信の宛先判定に使うことが多い）
         email:         email,
         name:          name,
-        // 通知メール本文（Formspreeダッシュボードの "Message" に表示）
         message:       mailBody,
-        // 個別フィールド（Formspreeダッシュボードの Submissions で確認可能）
         '送信日時':       sentAt,
         '会社名':         company,
         'お名前':         name,
@@ -345,7 +385,6 @@
       };
 
       try {
-        // --- ① Formspreeへ送信（メール通知・自動返信） ---
         let mailSent = false;
         let formErrorDetail = '';
         if (FORMSPREE_ENDPOINT && FORMSPREE_ENDPOINT.indexOf('YOUR_FORM_ID') === -1) {
@@ -366,7 +405,6 @@
           console.warn('Formspree endpoint not configured. Set data-formspree attribute on the form.');
         }
 
-        // --- ② テーブルAPIへ保存（任意・静的サイトでは未実装のため失敗しても無視） ---
         try {
           await fetch('tables/inquiries', {
             method:  'POST',
@@ -382,21 +420,15 @@
         }
 
         if (!mailSent) {
-          if (errorEl) {
-            errorEl.textContent = formErrorDetail
-              ? ('送信できませんでした：' + formErrorDetail + ' お手数ですが、お電話（03-6890-3248）にてご連絡ください。')
-              : '送信に失敗しました。Formspree の設定をご確認ください。お手数ですが、お電話（03-6890-3248）にてご連絡ください。';
-            errorEl.style.display = 'block';
-          }
-          if (submitBtn) {
-            submitBtn.disabled  = false;
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>送信する';
-          }
+          showError(formErrorDetail
+            ? ('送信できませんでした：' + formErrorDetail + ' お手数ですが、お電話（03-6890-3248）にてご連絡ください。')
+            : '送信に失敗しました。Formspree の設定をご確認ください。お手数ですが、お電話（03-6890-3248）にてご連絡ください。');
+          resetSendButton();
           return;
         }
 
-        // --- 成功（Formspree 送信済み） ---
         form.reset();
+        showInputStep();
         if (successEl) {
           successEl.innerHTML = [
             '<strong><i class="fas fa-check-circle"></i> 送信が完了しました。</strong><br>',
@@ -406,30 +438,56 @@
           ].join('');
           successEl.style.display = 'block';
         }
-        if (submitBtn) {
-          submitBtn.disabled  = false;
-          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>送信する';
-        }
+        resetSendButton();
         if (successEl) {
           window.scrollTo({ top: successEl.getBoundingClientRect().top + window.pageYOffset - 120, behavior: 'smooth' });
         }
-
       } catch (err) {
         console.error('Contact form:', err);
-        if (errorEl) {
-          errorEl.textContent = '送信中にエラーが発生しました。お手数ですが、お電話（03-6890-3248）にてご連絡ください。';
-          errorEl.style.display = 'block';
-        }
-        if (submitBtn) {
-          submitBtn.disabled  = false;
-          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i>送信する';
-        }
+        showError('送信中にエラーが発生しました。お手数ですが、お電話（03-6890-3248）にてご連絡ください。');
+        resetSendButton();
       }
+    }
+
+    // Enter キーで確認へ（確認画面表示中は送信しない）
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (isConfirmVisible()) return;
+      if (btnToConfirm) btnToConfirm.click();
     });
 
-    // Real-time error clear
+    if (btnToConfirm) {
+      btnToConfirm.addEventListener('click', function () {
+        clearMessages();
+        const v = validateContactFields();
+        if (!v.valid) {
+          showError(v.errorText || '入力内容をご確認ください。');
+          return;
+        }
+        showConfirmStep();
+      });
+    }
+
+    if (btnBack) {
+      btnBack.addEventListener('click', function () {
+        clearMessages();
+        showInputStep();
+        if (btnToConfirm) btnToConfirm.focus();
+      });
+    }
+
+    if (btnSend) {
+      btnSend.addEventListener('click', function () {
+        clearMessages();
+        submitContactToServer();
+      });
+    }
+
     form.querySelectorAll('input, select, textarea').forEach(function (field) {
       field.addEventListener('input', function () {
+        this.classList.remove('error');
+      });
+      field.addEventListener('change', function () {
         this.classList.remove('error');
       });
     });
